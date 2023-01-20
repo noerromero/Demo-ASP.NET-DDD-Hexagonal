@@ -24,6 +24,7 @@ public class AppointmentGetController : ControllerBase
     }
         
 
+    [HttpGet]
     public async Task<IActionResult> GetAll(){
         //implementend with _repository
         //var appointments = await _repository.SearchAll();

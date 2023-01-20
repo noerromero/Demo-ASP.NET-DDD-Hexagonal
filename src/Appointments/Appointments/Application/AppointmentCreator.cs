@@ -9,8 +9,8 @@ namespace Appointments.Application{
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public async Task Create(Guid appointmentID, DateTime startDateTime, DateTime endDateTime, int duration, string message){
-            await _repository.Create(new Appointment(appointmentID, startDateTime,endDateTime,duration,message));
+        public async Task Create(Guid appointmentID, DateTime startDateTime, DateTime endDateTime, int duration, string message, Guid fromUserID){
+            await _repository.Create(new Appointment(appointmentID, startDateTime,endDateTime,duration,message,fromUserID));
         }
 
 

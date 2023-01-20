@@ -22,8 +22,10 @@ public class AppointmentPostController : ControllerBase
                                         , DateTime.Parse(body["StartDateTime"].ToString())
                                         , DateTime.Parse(body["EndDateTime"].ToString())
                                         , Int32.Parse(body["Duration"].ToString())
-                                        , body["Message"].ToString());
-        return StatusCode(201);
+                                        , body["Message"].ToString()
+                                        , Guid.Parse(body["FromUserID"].ToString()));
+        //return StatusCode(201);
+        return StatusCode(StatusCodes.Status201Created);
 
     }
 
