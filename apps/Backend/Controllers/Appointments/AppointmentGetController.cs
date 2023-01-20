@@ -24,13 +24,13 @@ public class AppointmentGetController : ControllerBase
     }
         
 
-    public async Task<IEnumerable<Appointment>> GetAll(){
+    public async Task<IActionResult> GetAll(){
         //implementend with _repository
         //var appointments = await _repository.SearchAll();
         //return appointments;
 
         //implemented with _application
         var appointments = await _appointmentSearcher.SearchAll();
-        return appointments;
+        return Ok(appointments);
     }
 }

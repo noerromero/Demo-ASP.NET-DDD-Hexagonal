@@ -21,7 +21,7 @@ public class AppointmentPostController : ControllerBase
         await _appointmentCreator.Create(Guid.Parse(body["AppointmentID"].ToString())
                                         , DateTime.Parse(body["StartDateTime"].ToString())
                                         , DateTime.Parse(body["EndDateTime"].ToString())
-                                        , Double.Parse(body["Duration"].ToString())
+                                        , Int32.Parse(body["Duration"].ToString())
                                         , body["Message"].ToString());
         return StatusCode(201);
 

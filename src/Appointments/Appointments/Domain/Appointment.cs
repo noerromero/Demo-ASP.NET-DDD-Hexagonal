@@ -8,18 +8,18 @@ namespace Appointments.Domain
         public Guid AppointmentID {get; set;}
         public DateTime StartDateTime {get; set;}
         public DateTime EndDateTime {get; set;}
-        public double Duration {get; set;}
+        public int DurationInMinutes {get; set;}
         public string Message {get; set;}
 
         public Appointment(){
 
         }
 
-        public Appointment(Guid appointmentID, DateTime startDateTime, DateTime endDateTime, double duration, string message){
+        public Appointment(Guid appointmentID, DateTime startDateTime, DateTime endDateTime, int durationInMinutes, string message){
             AppointmentID = appointmentID;
             StartDateTime = startDateTime;
             EndDateTime = endDateTime;
-            Duration = duration;
+            DurationInMinutes = durationInMinutes;
             Message = message;
         }
         
