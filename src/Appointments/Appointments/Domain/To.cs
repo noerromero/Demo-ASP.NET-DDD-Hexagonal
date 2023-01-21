@@ -1,4 +1,6 @@
-public class To{
+namespace Appointments.Domain
+{
+    public class To{
     public Guid ToUserID {get; set;}
 
     public To(){
@@ -10,3 +12,5 @@ public class To{
     }
 
 }
+}
+
