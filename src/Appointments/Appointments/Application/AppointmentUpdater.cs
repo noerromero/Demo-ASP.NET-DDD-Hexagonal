@@ -12,9 +12,8 @@ namespace Appointments.Application{
 
         public async Task<bool> Update(Guid appointmentID, DateTime startDateTime, DateTime endDateTime, int duration, string message, Guid fromUserID){
             
-            //var appointment = _repository.SearchByID(appointmentID);
-            //if (appointment == null)
-            //    return false;
+            if (!await _repository.AppointmentExists(appointmentID))
+                return false;
             
             await _repository.Update(new Appointment(
                 appointmentID,startDateTime,endDateTime, duration, message, fromUserID

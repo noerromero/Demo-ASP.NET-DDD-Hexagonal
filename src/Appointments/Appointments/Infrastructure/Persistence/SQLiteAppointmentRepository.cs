@@ -23,15 +23,30 @@ namespace Appointments.Infrastructure.Persistence
             return await _context.Appointments.ToListAsync();
         }
 
-        public async Task<Appointment> SearchByID(Guid appointmentID){
+        public async Task<Appointment?> SearchByID(Guid appointmentID){
             //return await _context.Appointments.FindAsync(appointmentID.ToString());
-            return await _context.Appointments
+            var appointment = await _context.Appointments
                             .FirstOrDefaultAsync(x => x.AppointmentID == appointmentID);
+            
+            return appointment;
         }
 
         public async Task Update(Appointment appointment){
             _context.Entry(appointment).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
+
+        public async Task Delete(Appointment appointment){
+            //var appointment = await _context.Appointments.FirstAsync(x => x.AppointmentID == appointmentID);
+            _context.Appointments.Remove(appointment);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> AppointmentExists(Guid appointmentID) {
+            return await _context.Appointments.AnyAsync(x => x.AppointmentID == appointmentID);
+        } 
+        
+
+        
     }
 }
