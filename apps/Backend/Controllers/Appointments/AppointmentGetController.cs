@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Appointments.Domain;
 using Appointments.Application;
+using AutoMapper;
+using Backend.Appointments.Models;
 
 namespace Backend.Controllers;
 
@@ -19,8 +21,11 @@ public class AppointmentGetController : ControllerBase
 
     //implemented with _application and repository
     private AppointmentSearcher _appointmentSearcher;
-    public AppointmentGetController(IAppointmentRepository repository){
+    private IMapper _mapper;
+
+    public AppointmentGetController(IAppointmentRepository repository, IMapper mapper){
         _appointmentSearcher = new AppointmentSearcher(repository);
+        _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
     }
         
 
@@ -32,6 +37,9 @@ public class AppointmentGetController : ControllerBase
 
         //implemented with _application
         var appointments = await _appointmentSearcher.SearchAll();
-        return Ok(appointments);
+        
+        //return Ok(appointments);
+        //return DTO
+        return Ok(_mapper.Map<IEnumerable<AppointmentGetResponseDTO>>(appointments));
     }
 }

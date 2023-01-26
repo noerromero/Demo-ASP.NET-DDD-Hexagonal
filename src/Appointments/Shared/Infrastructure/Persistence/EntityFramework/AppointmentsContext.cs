@@ -12,6 +12,6 @@ namespace Appointments.Shared.Infrastructure.Persistence.EntityFramework
             Database.EnsureCreated();
         }
 
-        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Appointment> Appointments { get; set; } = null!;
     }
 }

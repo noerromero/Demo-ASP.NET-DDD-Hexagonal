@@ -20,6 +20,9 @@ builder.Services.AddDbContext<AppointmentsContext>(x => {
 //add manually
 builder.Services.AddScoped<IAppointmentRepository, SQLiteAppointmentRepository>();
 
+//add manually
+builder.Services.AddAutoMapper(typeof(Program),typeof(Appointment));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -22,5 +22,16 @@ namespace Appointments.Infrastructure.Persistence
         {
             return await _context.Appointments.ToListAsync();
         }
+
+        public async Task<Appointment> SearchByID(Guid appointmentID){
+            //return await _context.Appointments.FindAsync(appointmentID.ToString());
+            return await _context.Appointments
+                            .FirstOrDefaultAsync(x => x.AppointmentID.ToString() == appointmentID.ToString());
+        }
+
+        public async Task Update(Appointment appointment){
+            _context.Entry(appointment).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
     }
 }
