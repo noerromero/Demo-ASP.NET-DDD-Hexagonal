@@ -15,6 +15,10 @@ namespace Appointments.Application
         {
             return await _repository.SearchAll();
         }
+
+        public async Task<Appointment> SearchByID(Guid appointmentID){
+            return await _repository.SearchByID(appointmentID);
+        }
         
     }
 }

@@ -42,4 +42,10 @@ public class AppointmentGetController : ControllerBase
         //return DTO
         return Ok(_mapper.Map<IEnumerable<AppointmentGetResponseDTO>>(appointments));
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetByID(Guid id){
+        var appointment = await _appointmentSearcher.SearchByID(id);
+        return Ok(_mapper.Map<AppointmentGetResponseDTO>(appointment));
+    }
 }

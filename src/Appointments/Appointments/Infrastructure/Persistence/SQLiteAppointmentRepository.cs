@@ -26,7 +26,7 @@ namespace Appointments.Infrastructure.Persistence
         public async Task<Appointment> SearchByID(Guid appointmentID){
             //return await _context.Appointments.FindAsync(appointmentID.ToString());
             return await _context.Appointments
-                            .FirstOrDefaultAsync(x => x.AppointmentID.ToString() == appointmentID.ToString());
+                            .FirstOrDefaultAsync(x => x.AppointmentID == appointmentID);
         }
 
         public async Task Update(Appointment appointment){
