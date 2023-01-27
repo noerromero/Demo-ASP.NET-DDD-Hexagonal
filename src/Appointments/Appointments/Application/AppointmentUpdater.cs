@@ -20,6 +20,25 @@ namespace Appointments.Application{
             ));
             return true;
         }
+
+        public async Task<bool> PartialUpdate(Guid appointmentID, DateTime? startDateTime, DateTime? endDateTime, int? duration, string? message, Guid? fromUserID){
+            
+            var appointment = await _repository.SearchByID(appointmentID);
+            
+            if (appointment == null)
+                return false;
+
+            appointment.StartDateTime = startDateTime ?? appointment.StartDateTime;
+            appointment.EndDateTime = endDateTime ?? appointment.EndDateTime;
+            appointment.DurationInMinutes = duration ?? appointment.DurationInMinutes;
+            appointment.Message = message ?? appointment.Message;
+            appointment.FromUserId = fromUserID ?? appointment.FromUserId;
+
+            await _repository.Update(appointment);
+
+            return true;
+        }
+
     }
 
 }

@@ -10,6 +10,7 @@ public class AppointmentProfile : Profile
         CreateMap<Appointment, AppointmentGetResponseDTO>();
         CreateMap<AppointmentPostRequestDTO, Appointment>();
         CreateMap<AppointmentPutRequestDTO, Appointment>();
+        CreateMap<AppointmentPatchRequestDTO, Appointment>();
     }
 
 }

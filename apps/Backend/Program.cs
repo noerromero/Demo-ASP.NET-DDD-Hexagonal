@@ -23,6 +23,10 @@ builder.Services.AddScoped<IAppointmentRepository, SQLiteAppointmentRepository>(
 //add manually
 builder.Services.AddAutoMapper(typeof(Program),typeof(Appointment));
 
+//add manually for works patch controller 
+builder.Services.AddControllersWithViews()
+                .AddNewtonsoftJson();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
