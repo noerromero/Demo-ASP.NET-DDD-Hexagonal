@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Appointments.Domain;
-using Appointments.Application;
+using Appointments.Calendars.Domain;
+using Appointments.Calendars.Application;
 using AutoMapper;
 using Backend.Appointments.Models;
 

@@ -1,4 +1,5 @@
-namespace Appointments.Domain
+
+namespace Appointments.Calendars.Domain
 {
     public interface IAppointmentRepository
     {

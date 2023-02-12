@@ -1,6 +1,6 @@
-using Appointments.Domain;
+using Appointments.Calendars.Domain;
 
-namespace Appointments.Application{
+namespace Appointments.Calendars.Application{
     public class AppointmentRemover{
         private IAppointmentRepository _repository;
 

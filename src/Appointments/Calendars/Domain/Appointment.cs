@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Appointments.Domain
+namespace Appointments.Calendars.Domain
 {
     public class Appointment
     {

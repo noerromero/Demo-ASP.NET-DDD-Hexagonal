@@ -1,4 +1,4 @@
-using Appointments.Domain;
+using Appointments.Calendars.Domain;
 using AutoMapper;
 using Backend.Appointments.Models;
 

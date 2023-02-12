@@ -1,6 +1,6 @@
 
 
-using Appointments.Domain;
+using Appointments.Calendars.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Appointments.Shared.Infrastructure.Persistence.EntityFramework
