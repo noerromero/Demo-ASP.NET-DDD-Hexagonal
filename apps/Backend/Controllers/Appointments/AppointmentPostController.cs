@@ -35,7 +35,8 @@ public class AppointmentPostController : ControllerBase
     }
     */
 
-    /*Implementing Post method with DTO class*/
+    /*
+    //Implementing Post method with DTO class
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] AppointmentPostRequestDTO appointmentPostRequestDTO){
         var appointment = _mapper.Map<Appointment>(appointmentPostRequestDTO);
@@ -50,5 +51,5 @@ public class AppointmentPostController : ControllerBase
         return StatusCode(StatusCodes.Status201Created);
 
     }
-
+    */
 }

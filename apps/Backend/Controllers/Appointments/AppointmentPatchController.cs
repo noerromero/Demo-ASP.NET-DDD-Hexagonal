@@ -22,6 +22,8 @@ public class AppointmentPatchController : ControllerBase
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
+    /* 
+
     [HttpPatch("{id}")]
     public async Task<IActionResult> Patch(Guid id,
                  [FromBody] JsonPatchDocument<AppointmentPatchRequestDTO> patchDocument){
@@ -51,5 +53,5 @@ public class AppointmentPatchController : ControllerBase
         return NoContent();
         //it's like : return StatusCode(StatusCodes.Status204NoContent); 
     }
-
+    */
 }

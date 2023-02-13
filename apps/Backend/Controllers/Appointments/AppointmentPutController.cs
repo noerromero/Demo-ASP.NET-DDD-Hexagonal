@@ -18,6 +18,7 @@ public class AppointmentPutController : ControllerBase
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
+    /*
     public async Task<IActionResult> Put([FromBody] AppointmentPutRequestDTO appointmentPutRequestDTO){
         var appointment = _mapper.Map<Appointment>(appointmentPutRequestDTO);
         var success = await _appointmentUpdater.Update(appointment.AppointmentID
@@ -30,4 +31,5 @@ public class AppointmentPutController : ControllerBase
             return NotFound();
         return StatusCode(StatusCodes.Status204NoContent); 
     }
+    */
 }

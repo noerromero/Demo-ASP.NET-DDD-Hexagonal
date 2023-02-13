@@ -1,33 +1,20 @@
 using System.ComponentModel.DataAnnotations;
+using SharedCore.Domain.Aggregate;
 
 namespace Appointments.Calendars.Domain
 {
-    public class Appointment
+    public class Appointment : BaseEntity<Guid>
     {
-        [Key]
-        public Guid AppointmentID {get; set;}
-        public DateTime StartDateTime {get; set;} 
-        public DateTime EndDateTime {get; set;} 
-        public int DurationInMinutes {get; set;} 
-        public string Message {get; set;} 
-        public Guid FromUserId {get; set;} 
+        public RangeOfDate RangeOfDates {get; private set;} 
+        public string Message {get; private set;} 
+        public Guid FromUserId {get; private set;}
 
-        //public ICollection<To> ToUsers {get; set;}
-
-        //public Appointment(){
-            
-        //}
-
-        public Appointment(Guid appointmentID, DateTime startDateTime, DateTime endDateTime,
-                            int durationInMinutes, string message, Guid fromUserId){
-                            //,ICollection<To> toUsers){
-            AppointmentID = appointmentID;
-            StartDateTime = startDateTime;
-            EndDateTime = endDateTime;
-            DurationInMinutes = durationInMinutes;
+        public Appointment(Guid id, DateTimeOffset startDateTime, DateTimeOffset endDateTime,
+                            string message, Guid fromUserId){
+            Id = id;
+            RangeOfDates = new RangeOfDate(startDateTime,endDateTime);
             Message = message;
             FromUserId = fromUserId;
-            //ToUsers = toUsers;
         }
         
     }

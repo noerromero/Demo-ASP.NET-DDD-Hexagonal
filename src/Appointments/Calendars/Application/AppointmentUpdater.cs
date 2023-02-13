@@ -16,11 +16,12 @@ namespace Appointments.Calendars.Application{
                 return false;
             
             await _repository.Update(new Appointment(
-                appointmentID,startDateTime,endDateTime, duration, message, fromUserID
+                appointmentID,startDateTime,endDateTime, message, fromUserID
             ));
             return true;
         }
 
+        /*
         public async Task<bool> PartialUpdate(Guid appointmentID, DateTime? startDateTime, DateTime? endDateTime, int? duration, string? message, Guid? fromUserID){
             
             var appointment = await _repository.SearchByID(appointmentID);
@@ -30,7 +31,7 @@ namespace Appointments.Calendars.Application{
 
             appointment.StartDateTime = startDateTime ?? appointment.StartDateTime;
             appointment.EndDateTime = endDateTime ?? appointment.EndDateTime;
-            appointment.DurationInMinutes = duration ?? appointment.DurationInMinutes;
+            //appointment.DurationInMinutes = duration ?? appointment.DurationInMinutes;
             appointment.Message = message ?? appointment.Message;
             appointment.FromUserId = fromUserID ?? appointment.FromUserId;
 
@@ -38,7 +39,7 @@ namespace Appointments.Calendars.Application{
 
             return true;
         }
-
+        */   
     }
 
 }

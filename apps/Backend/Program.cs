@@ -2,6 +2,7 @@ using Appointments.Calendars.Domain;
 using Appointments.Shared.Infrastructure.Persistence.EntityFramework;
 using Appointments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Appointments.Calendars.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<AppointmentsContext>(x => {
 
 //add manually
 builder.Services.AddScoped<IAppointmentRepository, SQLiteAppointmentRepository>();
+builder.Services.AddScoped<ICalendarRepository, SQLiteCalendarRepository>();
 
 //add manually
 builder.Services.AddAutoMapper(typeof(Program),typeof(Appointment));
