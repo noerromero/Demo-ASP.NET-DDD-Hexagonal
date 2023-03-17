@@ -13,13 +13,19 @@ namespace Appointments.Calendars.Domain
         private Appointment(){
             
         }
-        public Appointment(Guid id, DateTimeOffset startDateTime, DateTimeOffset endDateTime,
-                            string message, Guid fromUserId){
+        public Appointment(Guid id, Guid calendarId
+                            , DateTimeOffset startDateTime
+                            , DateTimeOffset endDateTime
+                            , string message, Guid fromUserId){
             Id = id;
+            CalendarId = calendarId;
             RangeOfDates = new RangeOfDate(startDateTime,endDateTime);
             Message = message;
             FromUserId = fromUserId;
         }
+
+        
+        public void SetMessage(string newMessage) => Message = newMessage;
         
     }
 }

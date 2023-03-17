@@ -11,11 +11,11 @@ namespace Appointments.Calendars.Application
         }
 
         public async Task<IEnumerable<Calendar>> SearchByUserId(Guid userId){
-            return await _calendarRepository.SearchByUserId(userId);
+            return await _calendarRepository.SearchCalendarByUserId(userId);
         }
 
         public async Task<Calendar?> SearchById(Guid id){
-            return await _calendarRepository.SearchById(id);
+            return await _calendarRepository.SearchCalendarById(id);
         }
         
     }

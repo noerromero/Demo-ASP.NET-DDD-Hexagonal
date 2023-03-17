@@ -21,4 +21,10 @@ public class RangeOfDate : ValueObject
             yield return this;
     }
 
+    public void SetNewRangeOfDate(DateTimeOffset startDateTime, DateTimeOffset endDateTime ){
+            StartDateTime = startDateTime;
+            EndDateTime = endDateTime;
+
+        }
+
 }

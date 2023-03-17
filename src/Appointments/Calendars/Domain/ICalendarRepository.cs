@@ -2,8 +2,15 @@ namespace Appointments.Calendars.Domain;
 
 public interface ICalendarRepository 
 {
-    Task Create(Appointment appointment);
-    Task<IEnumerable<Calendar>> SearchByUserId(Guid userId);
-    Task<Calendar?> SearchById(Guid id);
-    Task<bool> CalendarExists(Guid appointmentID);
+    Task CreateCalendar(Calendar calendar);
+    Task<IEnumerable<Calendar>> SearchCalendarByUserId(Guid userId);
+    Task<Calendar?> SearchCalendarById(Guid calendarId);
+    Task<bool> CalendarExists(Guid calendarId);
+
+    Task CreateAppointment(Appointment appointment);
+    Task<IEnumerable<Appointment>> SearchAllAppointments();
+    Task<Appointment?> SearchAppointmentByID(Guid appointmentID);
+    Task UpdateAppointment(Appointment appointment);
+    Task DeleteAppointment(Appointment appointment);
+    Task<bool> AppointmentExists(Guid appointmentID);
 }

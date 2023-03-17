@@ -4,18 +4,29 @@ namespace Appointments.Calendars.Application{
     
     public class AppointmentCreator{
         
-        private IAppointmentRepository _repository;
-        public AppointmentCreator(IAppointmentRepository repository){
+        private ICalendarRepository _repository;
+        public AppointmentCreator(ICalendarRepository repository){
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        /*
-        public async Task Create(Guid appointmentID, DateTime startDateTime, DateTime endDateTime, int duration, string message, Guid fromUserID){
-            await _repository.Create(new Appointment(appointmentID, startDateTime,endDateTime,duration,message,fromUserID));
+        
+        public async Task Create(Guid appointmentID
+                                , Guid CalendarId
+                                , DateTimeOffset startDateTime
+                                , DateTimeOffset endDateTime
+                                , string message
+                                , Guid fromUserID){
+            
+            
+            await _repository.CreateAppointment(new Appointment(
+                  appointmentID
+                , CalendarId
+                , startDateTime
+                , endDateTime
+                , message
+                , fromUserID
+                ));
         }
-
-        */
-
 
     }
 }

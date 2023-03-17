@@ -11,7 +11,7 @@ public class AppointmentDeleteController : ControllerBase
 {
     private AppointmentRemover _appointmentRemover;
 
-    public AppointmentDeleteController(IAppointmentRepository repository){
+    public AppointmentDeleteController(ICalendarRepository repository){
         _appointmentRemover = new AppointmentRemover(repository);
     }
 

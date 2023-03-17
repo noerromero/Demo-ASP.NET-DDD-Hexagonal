@@ -23,7 +23,7 @@ public class AppointmentGetController : ControllerBase
     private AppointmentSearcher _appointmentSearcher;
     private IMapper _mapper;
 
-    public AppointmentGetController(IAppointmentRepository repository, IMapper mapper){
+    public AppointmentGetController(ICalendarRepository repository, IMapper mapper){
         _appointmentSearcher = new AppointmentSearcher(repository);
         _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
     }
