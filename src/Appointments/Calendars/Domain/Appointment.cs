@@ -26,6 +26,8 @@ namespace Appointments.Calendars.Domain
 
         
         public void SetMessage(string newMessage) => Message = newMessage;
+        public void SetFromUserId(Guid newFromUserId) => FromUserId = newFromUserId;
+        public void SetCalendarId(Guid newCalendarid) => CalendarId = newCalendarid;
         
     }
 }
