@@ -1,12 +1,12 @@
-using SharedCore.Domain.Aggregate;
+using SharedCore.Domain.Entity;
 
 namespace Appointments.Calendars.Domain;
 
-public class To : BaseEntity<Guid>
+public class AppointmentTo : BaseEntity<Guid>
 {
     public Guid ToUserId {get; private set;}
 
-    public To(Guid id, Guid toUserId){
+    public AppointmentTo(Guid id, Guid toUserId){
         Id = id;
         ToUserId = toUserId;
     }

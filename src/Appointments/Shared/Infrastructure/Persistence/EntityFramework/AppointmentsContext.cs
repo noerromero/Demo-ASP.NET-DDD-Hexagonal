@@ -16,9 +16,10 @@ namespace Appointments.Shared.Infrastructure.Persistence.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CalendarConfiguration());
+            modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
         }
 
-        //public DbSet<Appointment> Appointments { get; set; } = null!;
         public DbSet<Calendar> Calendars { get; set; } = null!;
+        public DbSet<Appointment> Appointments { get; set; } = null!;
     }
 }

@@ -21,12 +21,7 @@ public class SQLiteCalendarRepository : ICalendarRepository
         throw new NotImplementedException();
     }
 
-    public Task Delete(Appointment appointment)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<Calendar>> SearchByUserId(Guid userId)
+   public async Task<IEnumerable<Calendar>> SearchByUserId(Guid userId)
     {
         return await _context.Calendars.Where(x => x.UserId == userId).ToListAsync();
     }

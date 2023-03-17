@@ -1,4 +1,4 @@
-namespace SharedCore.Domain.Aggregate{
+namespace SharedCore.Domain.Entity{
     public abstract class BaseEntity<TId>{
         public TId Id {get; set;}
 

@@ -1,3 +1,4 @@
+using SharedCore.Domain.Entity;
 using SharedCore.Domain.Aggregate;
 
 namespace Appointments.Calendars.Domain{
