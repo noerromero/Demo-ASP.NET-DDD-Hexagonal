@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Appointments.Calendars.Domain;
 using Appointments.Calendars.Application;
-using Backend.Appointments.Models;
+using Backend.Controllers.Appointments.Models;
 using AutoMapper;
 
 namespace Backend.Controllers;
@@ -46,7 +46,8 @@ public class AppointmentPostController : ControllerBase
                                         , appointment.RangeOfDates.StartDateTime
                                         , appointment.RangeOfDates.EndDateTime
                                         , appointment.Message
-                                        , appointment.FromUserId);
+                                        , appointment.FromUserId
+                                        , appointment.Receivers);
         //return StatusCode(201);
         return StatusCode(StatusCodes.Status201Created);
 

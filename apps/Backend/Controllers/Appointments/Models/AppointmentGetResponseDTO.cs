@@ -1,5 +1,4 @@
-namespace Backend.Appointments.Models;
-
+namespace Backend.Controllers.Appointments.Models;
 public class AppointmentGetResponseDTO{
     public string AppointmentId {get; set;} = string.Empty;
     public string CalendarId {get; set;} = string.Empty;
@@ -8,4 +7,5 @@ public class AppointmentGetResponseDTO{
     public int DurationInMinutes {get; set;}
     public string Message {get; set;} = string.Empty;
     public string FromUserId {get; set;} = string.Empty;
+    public List<ReceiverDTO> Receivers {get; set;} = new List<ReceiverDTO>();
 }

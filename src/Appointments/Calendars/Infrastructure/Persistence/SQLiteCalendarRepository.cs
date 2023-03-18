@@ -32,17 +32,31 @@ public class SQLiteCalendarRepository : ICalendarRepository
     }
 
     public async Task CreateAppointment(Appointment appointment){
-        await _context.Appointments.AddAsync(appointment);
-        await _context.SaveChangesAsync();
+        using var transaction = _context.Database.BeginTransaction();
+        try{
+            await _context.Appointments.AddAsync(appointment);
+            //await _context.SaveChangesAsync();
+
+            await _context.Receivers.AddRangeAsync(appointment.Receivers);
+            await _context.SaveChangesAsync();
+
+            await transaction.CommitAsync();
+
+        }catch {
+            await transaction.RollbackAsync();
+            throw new ApplicationException("Transaction failed");
+        }
     }
     public async Task<IEnumerable<Appointment>> SearchAllAppointments(){
         return await _context.Appointments.ToListAsync();
     }
-    public async Task<Appointment?> SearchAppointmentByID(Guid appointmentID){
-        var appointment = await _context.Appointments
-                            .FirstOrDefaultAsync(x => x.Id == appointmentID);
+    public async Task<Appointment?> SearchAppointmentByID(Guid appointmentId, bool includeReceivers){
+        if (includeReceivers)
+            return  await _context.Appointments.Include(r => r.Receivers)
+                            .FirstOrDefaultAsync(x => x.Id == appointmentId);
             
-        return appointment;
+        return  await _context.Appointments
+                            .FirstOrDefaultAsync(x => x.Id == appointmentId);
     }
     public async Task UpdateAppointment(Appointment appointment){
         _context.Entry(appointment).State = EntityState.Modified;

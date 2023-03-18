@@ -16,8 +16,8 @@ namespace Appointments.Calendars.Application
             return await _repository.SearchAllAppointments();
         }
 
-        public async Task<Appointment?> SearchByID(Guid appointmentID){
-            return await _repository.SearchAppointmentByID(appointmentID);
+        public async Task<Appointment?> SearchByID(Guid appointmentId, bool includeReceivers){
+            return await _repository.SearchAppointmentByID(appointmentId, includeReceivers);
         }
         
     }

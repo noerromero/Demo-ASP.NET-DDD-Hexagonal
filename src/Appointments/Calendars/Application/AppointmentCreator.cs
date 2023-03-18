@@ -15,7 +15,8 @@ namespace Appointments.Calendars.Application{
                                 , DateTimeOffset startDateTime
                                 , DateTimeOffset endDateTime
                                 , string message
-                                , Guid fromUserID){
+                                , Guid fromUserID
+                                , IEnumerable<Receiver> receivers){
             
             
             await _repository.CreateAppointment(new Appointment(
@@ -25,6 +26,7 @@ namespace Appointments.Calendars.Application{
                 , endDateTime
                 , message
                 , fromUserID
+                , receivers
                 ));
         }
 

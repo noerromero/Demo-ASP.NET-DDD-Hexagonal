@@ -1,4 +1,4 @@
-namespace Backend.Appointments.Models;
+namespace Backend.Controllers.Appointments.Models;
 
 public class AppointmentPatchRequestDTO{
     public DateTimeOffset? StartDateTime {get; set;} = null;

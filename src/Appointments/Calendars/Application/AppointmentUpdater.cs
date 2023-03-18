@@ -28,7 +28,7 @@ namespace Appointments.Calendars.Application{
             return true;
             */
 
-            var appointment = await _repository.SearchAppointmentByID(appointmentId);
+            var appointment = await _repository.SearchAppointmentByID(appointmentId, false);
             
             if (appointment == null)
                 return false;
@@ -49,7 +49,7 @@ namespace Appointments.Calendars.Application{
         
         public async Task<bool> PartialUpdate(Guid appointmentId, DateTimeOffset? startDateTime, DateTimeOffset? endDateTime, string? message){
             
-            var appointment = await _repository.SearchAppointmentByID(appointmentId);
+            var appointment = await _repository.SearchAppointmentByID(appointmentId,false);
             
             if (appointment == null)
                 return false;

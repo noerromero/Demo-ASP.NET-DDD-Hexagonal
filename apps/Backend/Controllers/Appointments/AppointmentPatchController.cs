@@ -1,7 +1,7 @@
 using Appointments.Calendars.Application;
 using Appointments.Calendars.Domain;
 using AutoMapper;
-using Backend.Appointments.Models;
+using Backend.Controllers.Appointments.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 

@@ -17,6 +17,7 @@ public class ReceiverConfiguration : IEntityTypeConfiguration<Receiver>
         //Name of fields
         builder.Property(x => x.Id).HasColumnName(nameof(Receiver.Id));
         builder.Property(x => x.ToUserId).HasColumnName(nameof(Receiver.ToUserId));
+        builder.Property(x => x.AppointmentId).HasColumnName(nameof(Receiver.AppointmentId));
         
         //constrains of fields
         builder.Property(x => x.ToUserId).IsRequired();
