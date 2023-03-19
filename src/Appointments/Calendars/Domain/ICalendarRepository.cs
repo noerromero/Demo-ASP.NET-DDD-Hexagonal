@@ -11,6 +11,7 @@ public interface ICalendarRepository
     Task<IEnumerable<Appointment>> SearchAllAppointments();
     Task<Appointment?> SearchAppointmentByID(Guid appointmentId, bool includeReceivers );
     Task UpdateAppointment(Appointment appointment);
+    Task PartialUpdateAppointment(Appointment appointment);
     Task DeleteAppointment(Appointment appointment);
     Task<bool> AppointmentExists(Guid appointmentID);
 }

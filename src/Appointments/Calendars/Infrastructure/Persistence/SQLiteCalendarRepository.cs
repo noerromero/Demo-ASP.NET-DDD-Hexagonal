@@ -59,8 +59,35 @@ public class SQLiteCalendarRepository : ICalendarRepository
                             .FirstOrDefaultAsync(x => x.Id == appointmentId);
     }
     public async Task UpdateAppointment(Appointment appointment){
+        using var transaction = _context.Database.BeginTransaction();
+        try {
+            var receiversForDelete = _context.Receivers
+                                        .Where(x => x.AppointmentId == appointment.Id).ToList();
+            _context.Receivers.RemoveRange(receiversForDelete);
+
+            await _context.Receivers.AddRangeAsync(appointment.Receivers);
+
+
+            _context.Appointments.Attach(appointment);
+            _context.Entry(appointment).State = EntityState.Modified;
+            _context.Entry(appointment.RangeOfDates).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch {
+            await transaction.RollbackAsync();
+            throw new ApplicationException("Transaction failed");
+        }
+        
+    }
+
+    public async Task PartialUpdateAppointment(Appointment appointment){
         _context.Entry(appointment).State = EntityState.Modified;
+        _context.Entry(appointment.RangeOfDates).State = EntityState.Modified;
+
         await _context.SaveChangesAsync();
+        
     }
     public async Task DeleteAppointment(Appointment appointment){
         _context.Appointments.Remove(appointment);

@@ -36,7 +36,8 @@ public class AppointmentProfile : Profile
         
         CreateMap<AppointmentPutRequestDTO, Appointment>()
                                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.AppointmentId))
-                                .ForMember(d => d.RangeOfDates, opt => opt.MapFrom(s => s));
+                                .ForMember(d => d.RangeOfDates, opt => opt.MapFrom(s => s))
+                                .ForMember(d => d.Receivers, opt => opt.MapFrom(s => s.Receivers));
 
         CreateMap<AppointmentPatchRequestDTO, Appointment>()
                                 .ForMember(d => d.RangeOfDates, opt => opt.MapFrom(s => s));

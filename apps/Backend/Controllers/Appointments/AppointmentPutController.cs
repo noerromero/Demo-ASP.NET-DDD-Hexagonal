@@ -26,7 +26,8 @@ public class AppointmentPutController : ControllerBase
                                         , appointment.RangeOfDates.StartDateTime
                                         , appointment.RangeOfDates.EndDateTime
                                         , appointment.Message
-                                        , appointment.FromUserId);
+                                        , appointment.FromUserId
+                                        , appointment.Receivers);
         if (!success)
             return NotFound();
         return StatusCode(StatusCodes.Status204NoContent); 

@@ -11,12 +11,18 @@ namespace Appointments.Calendars.Application{
         }
 
         public async Task<bool> Update(
-                              Guid appointmentId
-                            , Guid? calendarId
-                            , DateTimeOffset? startDateTime
-                            , DateTimeOffset? endDateTime
-                            , string message
-                            , Guid? fromUserId){
+                              Guid appointmentId, Guid calendarId, DateTimeOffset startDateTime
+                            , DateTimeOffset endDateTime, string message, Guid fromUserId
+                            , IEnumerable<Receiver> receivers){
+            
+            if (! await _repository.AppointmentExists(appointmentId))
+                return false;
+            
+            await _repository.UpdateAppointment(new Appointment(
+                                                appointmentId,calendarId,startDateTime,endDateTime
+                                                ,message,fromUserId,receivers));
+            
+            return true;
             
             /* This code works without value object (RangeOfDate) into Appointment Entity
             if (!await _repository.AppointmentExists(appointmentId))
@@ -28,14 +34,13 @@ namespace Appointments.Calendars.Application{
             return true;
             */
 
+            /*This code works without transaction scope (appointment and receivers)
             var appointment = await _repository.SearchAppointmentByID(appointmentId, false);
-            
             if (appointment == null)
                 return false;
 
             appointment.RangeOfDates.SetNewRangeOfDate( startDateTime ?? appointment.RangeOfDates.StartDateTime
                                     , endDateTime ?? appointment.RangeOfDates.EndDateTime);
-            
             appointment.SetMessage( message ?? appointment.Message);
             appointment.SetCalendarId(calendarId ?? appointment.CalendarId);
             appointment.SetFromUserId(fromUserId ?? appointment.FromUserId);
@@ -43,23 +48,26 @@ namespace Appointments.Calendars.Application{
             await _repository.UpdateAppointment(appointment);
 
             return true;
+            */
 
         }
 
         
-        public async Task<bool> PartialUpdate(Guid appointmentId, DateTimeOffset? startDateTime, DateTimeOffset? endDateTime, string? message){
+        public async Task<bool> PartialUpdate(Guid appointmentId, DateTimeOffset? startDateTime
+                                , DateTimeOffset? endDateTime, string? message){
             
             var appointment = await _repository.SearchAppointmentByID(appointmentId,false);
             
             if (appointment == null)
                 return false;
 
-            appointment.RangeOfDates.SetNewRangeOfDate( startDateTime ?? appointment.RangeOfDates.StartDateTime
-                                    , endDateTime ?? appointment.RangeOfDates.EndDateTime);
-            
+            appointment.RangeOfDates.SetNewRangeOfDate(startDateTime ?? appointment.RangeOfDates.StartDateTime
+                                    , endDateTime ?? appointment.RangeOfDates.EndDateTime
+            );
+                
             appointment.SetMessage( message ?? appointment.Message);
-            
-            await _repository.UpdateAppointment(appointment);
+                
+            await _repository.PartialUpdateAppointment(appointment);
 
             return true;
         }
