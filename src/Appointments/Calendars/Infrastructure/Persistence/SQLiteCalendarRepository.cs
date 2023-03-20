@@ -22,7 +22,7 @@ public class SQLiteCalendarRepository : ICalendarRepository
         await _context.SaveChangesAsync();
     }
 
-   public async Task<IEnumerable<Calendar>> SearchCalendarByUserId(Guid userId)
+   public async Task<IEnumerable<Calendar>> SearchCalendarsByUserId(Guid userId)
     {
         return await _context.Calendars.Where(x => x.UserId == userId).ToListAsync();
     }

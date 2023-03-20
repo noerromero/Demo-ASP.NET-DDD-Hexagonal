@@ -18,10 +18,12 @@ public class CalendarConfiguration : IEntityTypeConfiguration<Calendar>
         //Name of fields
         builder.Property(x => x.Id).HasColumnName(nameof(Calendar.Id));
         builder.Property(x => x.UserId).HasColumnName(nameof(Calendar.UserId));
+        builder.Property(x => x.Name).HasColumnName(nameof(Calendar.Name));
         
         //constrains of fields
         builder.Property(x => x.UserId).IsRequired();
         builder.Property(x => x.Id).ValueGeneratedNever();
+        builder.Property(x => x.Name).IsRequired();
 
         
     }

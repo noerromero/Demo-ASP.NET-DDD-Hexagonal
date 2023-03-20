@@ -11,7 +11,7 @@ namespace Appointments.Calendars.Application
         }
 
         public async Task<IEnumerable<Calendar>> SearchByUserId(Guid userId){
-            return await _calendarRepository.SearchCalendarByUserId(userId);
+            return await _calendarRepository.SearchCalendarsByUserId(userId);
         }
 
         public async Task<Calendar?> SearchById(Guid id){

@@ -14,7 +14,7 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
 
         //Id of table
         builder.HasKey(x => x.Id);
-
+        
         //Name of fields
         builder.Property(x => x.Id).HasColumnName(nameof(Appointment.Id));
         builder.Property(x => x.CalendarId).HasColumnName(nameof(Appointment.CalendarId));
@@ -30,5 +30,6 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         builder.Property(x => x.CalendarId).IsRequired();
         builder.Property(x => x.FromUserId).IsRequired();
         builder.Property(x => x.Id).ValueGeneratedNever();
+        
     }
 }

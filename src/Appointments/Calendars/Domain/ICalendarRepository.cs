@@ -3,7 +3,7 @@ namespace Appointments.Calendars.Domain;
 public interface ICalendarRepository 
 {
     Task CreateCalendar(Calendar calendar);
-    Task<IEnumerable<Calendar>> SearchCalendarByUserId(Guid userId);
+    Task<IEnumerable<Calendar>> SearchCalendarsByUserId(Guid userId);
     Task<Calendar?> SearchCalendarById(Guid calendarId);
     Task<bool> CalendarExists(Guid calendarId);
 
