@@ -47,8 +47,10 @@ public class SQLiteCalendarRepository : ICalendarRepository
             throw new ApplicationException("Transaction failed");
         }
     }
-    public async Task<IEnumerable<Appointment>> SearchAllAppointments(){
-        return await _context.Appointments.ToListAsync();
+    public async Task<IEnumerable<Appointment>> SearchAppointmentsByCalendarId(Guid calendarId){
+        return await _context.Appointments
+                                .Where(x => x.CalendarId == calendarId)
+                                .ToListAsync();
     }
     public async Task<Appointment?> SearchAppointmentByID(Guid appointmentId, bool includeReceivers){
         if (includeReceivers)

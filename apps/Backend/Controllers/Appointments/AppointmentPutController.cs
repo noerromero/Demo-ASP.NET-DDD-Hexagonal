@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("api/appointments")]
+[Route("api/calendars/{calendarId}/appointments")]
 public class AppointmentPutController : ControllerBase
 {
     private AppointmentUpdater _appointmentUpdater;
@@ -19,10 +19,10 @@ public class AppointmentPutController : ControllerBase
     }
 
     
-    public async Task<IActionResult> Put([FromBody] AppointmentPutRequestDTO appointmentPutRequestDTO){
+    public async Task<IActionResult> Put(Guid calendarId, [FromBody] AppointmentPutRequestDTO appointmentPutRequestDTO){
         var appointment = _mapper.Map<Appointment>(appointmentPutRequestDTO);
         var success = await _appointmentUpdater.Update(appointment.Id
-                                        , appointment.CalendarId
+                                        , calendarId
                                         , appointment.RangeOfDates.StartDateTime
                                         , appointment.RangeOfDates.EndDateTime
                                         , appointment.Message

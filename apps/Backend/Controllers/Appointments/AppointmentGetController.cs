@@ -7,7 +7,7 @@ using Backend.Controllers.Appointments.Models;
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("api/appointments")]
+[Route("api/calendars/{calendarId}/appointments")]
 public class AppointmentGetController : ControllerBase
 {
     /*
@@ -30,13 +30,13 @@ public class AppointmentGetController : ControllerBase
         
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(){
+    public async Task<IActionResult> GetByCalendarId(Guid calendarId){
         //implementend with _repository
         //var appointments = await _repository.SearchAll();
         //return appointments;
 
         //implemented with _application
-        var appointments = await _appointmentSearcher.SearchAll();
+        var appointments = await _appointmentSearcher.SearchByCalendarId(calendarId);
         
         //return Ok(appointments);
         //return DTO
@@ -44,8 +44,8 @@ public class AppointmentGetController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetByID(Guid id, bool includeReceivers ){
-        var appointment = await _appointmentSearcher.SearchByID(id, includeReceivers);
+    public async Task<IActionResult> GetByID(Guid calendarId, Guid id, bool includeReceivers ){
+        var appointment = await _appointmentSearcher.SearchByID(calendarId, id, includeReceivers);
         if(appointment == null)
             return NotFound();
         if (includeReceivers)

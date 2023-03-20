@@ -7,7 +7,7 @@ using AutoMapper;
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("api/appointments")]
+[Route("api/calendars/{calendarId}/appointments")]
 public class AppointmentPostController : ControllerBase
 {
     AppointmentCreator _appointmentCreator;
@@ -38,11 +38,11 @@ public class AppointmentPostController : ControllerBase
     
     //Implementing Post method with DTO class
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] AppointmentPostRequestDTO appointmentPostRequestDTO){
+    public async Task<IActionResult> Post(Guid calendarId, [FromBody] AppointmentPostRequestDTO appointmentPostRequestDTO){
         var appointment = _mapper.Map<Appointment>(appointmentPostRequestDTO);
         //await _bus.Dispatch(new CreateCourseCommand(id, body["name"].ToString(), body["duration"].ToString()));
         await _appointmentCreator.Create(appointment.Id
-                                        , appointment.CalendarId
+                                        , calendarId
                                         , appointment.RangeOfDates.StartDateTime
                                         , appointment.RangeOfDates.EndDateTime
                                         , appointment.Message

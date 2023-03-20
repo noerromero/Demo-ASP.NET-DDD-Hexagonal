@@ -8,7 +8,7 @@ public interface ICalendarRepository
     Task<bool> CalendarExists(Guid calendarId);
 
     Task CreateAppointment(Appointment appointment);
-    Task<IEnumerable<Appointment>> SearchAllAppointments();
+    Task<IEnumerable<Appointment>> SearchAppointmentsByCalendarId(Guid calendarId);
     Task<Appointment?> SearchAppointmentByID(Guid appointmentId, bool includeReceivers );
     Task UpdateAppointment(Appointment appointment);
     Task PartialUpdateAppointment(Appointment appointment);

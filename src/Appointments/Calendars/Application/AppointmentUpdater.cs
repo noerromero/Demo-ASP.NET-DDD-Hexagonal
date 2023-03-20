@@ -15,6 +15,9 @@ namespace Appointments.Calendars.Application{
                             , DateTimeOffset endDateTime, string message, Guid fromUserId
                             , IEnumerable<Receiver> receivers){
             
+            if (! await _repository.CalendarExists(calendarId))
+                return false;
+
             if (! await _repository.AppointmentExists(appointmentId))
                 return false;
             
@@ -53,9 +56,12 @@ namespace Appointments.Calendars.Application{
         }
 
         
-        public async Task<bool> PartialUpdate(Guid appointmentId, DateTimeOffset? startDateTime
+        public async Task<bool> PartialUpdate(Guid appointmentId, Guid calendarId, DateTimeOffset? startDateTime
                                 , DateTimeOffset? endDateTime, string? message){
             
+            if (! await _repository.CalendarExists(calendarId))
+                return false;
+
             var appointment = await _repository.SearchAppointmentByID(appointmentId,false);
             
             if (appointment == null)

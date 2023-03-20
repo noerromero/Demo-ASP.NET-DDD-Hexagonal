@@ -8,7 +8,10 @@ namespace Appointments.Calendars.Application{
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public async Task<bool> Delete(Guid appointmentId){
+        public async Task<bool> Delete(Guid appointmentId, Guid calendarId){
+            if (! await _repository.CalendarExists(calendarId))
+                return false;
+
             var appointment = await _repository.SearchAppointmentByID(appointmentId, false);
 
             if (appointment == null)

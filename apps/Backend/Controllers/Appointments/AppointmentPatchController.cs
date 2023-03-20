@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("api/appointments")]
+[Route("api/calendars/{calendarId}/appointments")]
 public class AppointmentPatchController : ControllerBase
 {
     private AppointmentUpdater _appointmentUpdater;
@@ -25,7 +25,7 @@ public class AppointmentPatchController : ControllerBase
     
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Patch(Guid id,
+    public async Task<IActionResult> Patch(Guid calendarId, Guid id,
                  [FromBody] JsonPatchDocument<AppointmentPatchRequestDTO> patchDocument){
         //JsonPatchDocument needs to install Json.Patch
                 
@@ -39,7 +39,7 @@ public class AppointmentPatchController : ControllerBase
         if(!TryValidateModel(appointmentForUpdateDTO))
             return BadRequest(ModelState); 
         
-        var success = await _appointmentUpdater.PartialUpdate(id
+        var success = await _appointmentUpdater.PartialUpdate(id, calendarId
                                         , appointmentForUpdateDTO.StartDateTime
                                         , appointmentForUpdateDTO.EndDateTime
                                         , appointmentForUpdateDTO.Message
