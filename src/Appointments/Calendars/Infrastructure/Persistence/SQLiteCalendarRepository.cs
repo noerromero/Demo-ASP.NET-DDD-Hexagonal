@@ -90,8 +90,20 @@ public class SQLiteCalendarRepository : ICalendarRepository
         
     }
     public async Task DeleteAppointment(Appointment appointment){
-        _context.Appointments.Remove(appointment);
-        await _context.SaveChangesAsync();
+        using var transaction = _context.Database.BeginTransaction();
+        try{
+            var receiversForDelete = _context.Receivers
+                                        .Where(x => x.AppointmentId == appointment.Id).ToList();
+            _context.Receivers.RemoveRange(receiversForDelete);
+            
+            _context.Appointments.Remove(appointment);
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }catch{
+            await transaction.RollbackAsync();
+            throw new ApplicationException("Transaction failed");
+        }
+        
     }
     public async Task<bool> AppointmentExists(Guid appointmentID){
         return await _context.Appointments.AnyAsync(x => x.Id == appointmentID);

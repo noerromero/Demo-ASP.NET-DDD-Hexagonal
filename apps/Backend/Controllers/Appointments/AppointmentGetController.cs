@@ -46,6 +46,8 @@ public class AppointmentGetController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByID(Guid id, bool includeReceivers ){
         var appointment = await _appointmentSearcher.SearchByID(id, includeReceivers);
+        if(appointment == null)
+            return NotFound();
         if (includeReceivers)
             return Ok(_mapper.Map<AppointmentGetResponseDTO>(appointment));
         return Ok(_mapper.Map<AppointmentWhitoutReceiverGetResponseDTO>(appointment));
