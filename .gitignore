@@ -35,6 +35,8 @@ msbuild.wrn
 
 # SQLite Data
 apps/Backend/AppointmentsDB.db
+apps/Backend/AppointmentsDB.db-shm
+apps/Backend/AppointmentsDB.db-wal
 
 # Visual Studio 2015
 .vs/

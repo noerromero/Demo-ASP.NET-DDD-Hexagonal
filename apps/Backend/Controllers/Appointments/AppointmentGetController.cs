@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using Appointments.Domain;
-using Appointments.Application;
+using Appointments.Calendars.Domain;
+using Appointments.Calendars.Application;
 using AutoMapper;
-using Backend.Appointments.Models;
+using Backend.Controllers.Appointments.Models;
 
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("api/appointments")]
+[Route("api/calendars/{calendarId}/appointments")]
 public class AppointmentGetController : ControllerBase
 {
     /*
@@ -23,29 +23,33 @@ public class AppointmentGetController : ControllerBase
     private AppointmentSearcher _appointmentSearcher;
     private IMapper _mapper;
 
-    public AppointmentGetController(IAppointmentRepository repository, IMapper mapper){
+    public AppointmentGetController(ICalendarRepository repository, IMapper mapper){
         _appointmentSearcher = new AppointmentSearcher(repository);
         _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
     }
         
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(){
+    public async Task<IActionResult> GetByCalendarId(Guid calendarId){
         //implementend with _repository
         //var appointments = await _repository.SearchAll();
         //return appointments;
 
         //implemented with _application
-        var appointments = await _appointmentSearcher.SearchAll();
+        var appointments = await _appointmentSearcher.SearchByCalendarId(calendarId);
         
         //return Ok(appointments);
         //return DTO
-        return Ok(_mapper.Map<IEnumerable<AppointmentGetResponseDTO>>(appointments));
+        return Ok(_mapper.Map<IEnumerable<AppointmentWhitoutReceiverGetResponseDTO>>(appointments));
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetByID(Guid id){
-        var appointment = await _appointmentSearcher.SearchByID(id);
-        return Ok(_mapper.Map<AppointmentGetResponseDTO>(appointment));
+    public async Task<IActionResult> GetByID(Guid calendarId, Guid id, bool includeReceivers ){
+        var appointment = await _appointmentSearcher.SearchByID(calendarId, id, includeReceivers);
+        if(appointment == null)
+            return NotFound();
+        if (includeReceivers)
+            return Ok(_mapper.Map<AppointmentGetResponseDTO>(appointment));
+        return Ok(_mapper.Map<AppointmentWhitoutReceiverGetResponseDTO>(appointment));
     }
 }

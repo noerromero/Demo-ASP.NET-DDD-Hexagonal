@@ -1,23 +1,23 @@
-using Appointments.Application;
-using Appointments.Domain;
+using Appointments.Calendars.Application;
+using Appointments.Calendars.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("api/appointments")]
+[Route("api/calendars/{calendarId}/appointments")]
 
 public class AppointmentDeleteController : ControllerBase
 {
     private AppointmentRemover _appointmentRemover;
 
-    public AppointmentDeleteController(IAppointmentRepository repository){
+    public AppointmentDeleteController(ICalendarRepository repository){
         _appointmentRemover = new AppointmentRemover(repository);
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id){
-        var success = await _appointmentRemover.Delete(id);
+    public async Task<IActionResult> Delete(Guid calendarId, Guid id){
+        var success = await _appointmentRemover.Delete(id, calendarId);
         if (!success)
             return NotFound();
         return StatusCode(StatusCodes.Status204NoContent);

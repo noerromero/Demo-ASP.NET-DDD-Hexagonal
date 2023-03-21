@@ -1,19 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
-using Appointments.Domain;
-using Appointments.Application;
-using Backend.Appointments.Models;
+using Appointments.Calendars.Domain;
+using Appointments.Calendars.Application;
+using Backend.Controllers.Appointments.Models;
 using AutoMapper;
 
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("api/appointments")]
+[Route("api/calendars/{calendarId}/appointments")]
 public class AppointmentPostController : ControllerBase
 {
     AppointmentCreator _appointmentCreator;
     private IMapper _mapper;
 
-    public AppointmentPostController(IAppointmentRepository repository, IMapper mapper){
+    public AppointmentPostController(ICalendarRepository repository, IMapper mapper){
         _appointmentCreator = new AppointmentCreator(repository);
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
@@ -35,20 +35,22 @@ public class AppointmentPostController : ControllerBase
     }
     */
 
-    /*Implementing Post method with DTO class*/
+    
+    //Implementing Post method with DTO class
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] AppointmentPostRequestDTO appointmentPostRequestDTO){
+    public async Task<IActionResult> Post(Guid calendarId, [FromBody] AppointmentPostRequestDTO appointmentPostRequestDTO){
         var appointment = _mapper.Map<Appointment>(appointmentPostRequestDTO);
         //await _bus.Dispatch(new CreateCourseCommand(id, body["name"].ToString(), body["duration"].ToString()));
-        await _appointmentCreator.Create(appointment.AppointmentID
-                                        , appointment.StartDateTime
-                                        , appointment.EndDateTime
-                                        , appointment.DurationInMinutes
+        await _appointmentCreator.Create(appointment.Id
+                                        , calendarId
+                                        , appointment.RangeOfDates.StartDateTime
+                                        , appointment.RangeOfDates.EndDateTime
                                         , appointment.Message
-                                        , appointment.FromUserId);
+                                        , appointment.FromUserId
+                                        , appointment.Receivers);
         //return StatusCode(201);
         return StatusCode(StatusCodes.Status201Created);
 
     }
-
+    
 }

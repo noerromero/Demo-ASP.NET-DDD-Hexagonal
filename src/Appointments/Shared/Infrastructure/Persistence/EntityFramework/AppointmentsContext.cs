@@ -1,6 +1,7 @@
 
 
-using Appointments.Domain;
+using Appointments.Calendars.Domain;
+using Appointments.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Appointments.Shared.Infrastructure.Persistence.EntityFramework
@@ -12,6 +13,15 @@ namespace Appointments.Shared.Infrastructure.Persistence.EntityFramework
             Database.EnsureCreated();
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new CalendarConfiguration());
+            modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
+            modelBuilder.ApplyConfiguration(new ReceiverConfiguration());
+        }
+
+        public DbSet<Calendar> Calendars { get; set; } = null!;
         public DbSet<Appointment> Appointments { get; set; } = null!;
+        public DbSet<Receiver> Receivers { get; set; } = null!;
     }
 }
