@@ -5,10 +5,10 @@ namespace Appointments.Calendars.Domain;
 public class RangeOfDate : ValueObject
 {
 
-    public DateTimeOffset StartDateTime {get; private set;}
-    public DateTimeOffset EndDateTime {get; private set;}
+    public DateTime StartDateTime {get; private set;}
+    public DateTime EndDateTime {get; private set;}
 
-    public RangeOfDate(DateTimeOffset startDateTime, DateTimeOffset endDateTime){
+    public RangeOfDate(DateTime startDateTime, DateTime endDateTime){
         StartDateTime = startDateTime;
         EndDateTime = endDateTime;
     }
@@ -21,7 +21,7 @@ public class RangeOfDate : ValueObject
             yield return this;
     }
 
-    public void SetNewRangeOfDate(DateTimeOffset startDateTime, DateTimeOffset endDateTime ){
+    public void SetNewRangeOfDate(DateTime startDateTime, DateTime endDateTime ){
             StartDateTime = startDateTime;
             EndDateTime = endDateTime;
 

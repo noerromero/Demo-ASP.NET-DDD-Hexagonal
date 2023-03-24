@@ -45,6 +45,7 @@ public class AppointmentPostController : ControllerBase
                                         , calendarId
                                         , appointment.RangeOfDates.StartDateTime
                                         , appointment.RangeOfDates.EndDateTime
+                                        , appointment.Subject
                                         , appointment.Message
                                         , appointment.FromUserId
                                         , appointment.Receivers);

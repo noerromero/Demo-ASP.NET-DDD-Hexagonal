@@ -18,6 +18,7 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         //Name of fields
         builder.Property(x => x.Id).HasColumnName(nameof(Appointment.Id));
         builder.Property(x => x.CalendarId).HasColumnName(nameof(Appointment.CalendarId));
+        builder.Property(x => x.Subject).HasColumnName(nameof(Appointment.Subject));
         builder.Property(x => x.Message).HasColumnName(nameof(Appointment.Message));
         builder.Property(x => x.FromUserId).HasColumnName(nameof(Appointment.FromUserId));
         builder.OwnsOne(x => x.RangeOfDates, x =>

@@ -42,6 +42,7 @@ public class AppointmentPatchController : ControllerBase
         var success = await _appointmentUpdater.PartialUpdate(id, calendarId
                                         , appointmentForUpdateDTO.StartDateTime
                                         , appointmentForUpdateDTO.EndDateTime
+                                        , appointmentForUpdateDTO.Subject
                                         , appointmentForUpdateDTO.Message
                                         );
 

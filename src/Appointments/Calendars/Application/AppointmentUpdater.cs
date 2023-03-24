@@ -11,8 +11,8 @@ namespace Appointments.Calendars.Application{
         }
 
         public async Task<bool> Update(
-                              Guid appointmentId, Guid calendarId, DateTimeOffset startDateTime
-                            , DateTimeOffset endDateTime, string message, Guid fromUserId
+                              Guid appointmentId, Guid calendarId, DateTime startDateTime
+                            , DateTime endDateTime, string subject, string message, Guid fromUserId
                             , IEnumerable<Receiver> receivers){
             
             if (! await _repository.CalendarExists(calendarId))
@@ -22,8 +22,8 @@ namespace Appointments.Calendars.Application{
                 return false;
             
             await _repository.UpdateAppointment(new Appointment(
-                                                appointmentId,calendarId,startDateTime,endDateTime
-                                                ,message,fromUserId,receivers));
+                                                appointmentId,calendarId,startDateTime,endDateTime,
+                                                subject,message,fromUserId,receivers));
             
             return true;
             
@@ -56,8 +56,8 @@ namespace Appointments.Calendars.Application{
         }
 
         
-        public async Task<bool> PartialUpdate(Guid appointmentId, Guid calendarId, DateTimeOffset? startDateTime
-                                , DateTimeOffset? endDateTime, string? message){
+        public async Task<bool> PartialUpdate(Guid appointmentId, Guid calendarId, DateTime? startDateTime
+                                , DateTime? endDateTime, string? subject, string? message){
             
             if (! await _repository.CalendarExists(calendarId))
                 return false;
@@ -71,7 +71,8 @@ namespace Appointments.Calendars.Application{
                                     , endDateTime ?? appointment.RangeOfDates.EndDateTime
             );
                 
-            appointment.SetMessage( message ?? appointment.Message);
+            appointment.SetMessage(message ?? appointment.Message);
+            appointment.SetSubject(subject ?? appointment.Subject);
                 
             await _repository.PartialUpdateAppointment(appointment);
 

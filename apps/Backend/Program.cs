@@ -3,6 +3,7 @@ using Appointments.Shared.Infrastructure.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Appointments.Calendars.Infrastructure.Persistence;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -27,6 +28,14 @@ builder.Services.AddAutoMapper(typeof(Program),typeof(Appointment));
 builder.Services.AddControllersWithViews()
                 .AddNewtonsoftJson();
 
+//add manually cors for Frontend
+builder.Services.AddCors(p => p.AddPolicy("CorsPolicy", builder =>
+{
+    builder.AllowAnyHeader()
+          .AllowAnyMethod()
+          .WithOrigins("https://localhost:7210");
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,6 +48,9 @@ if (app.Environment.IsDevelopment())
 //app.UseHttpsRedirection(); manually commented
 
 app.UseAuthorization();
+
+//Add manually cors for frontend
+app.UseCors("CorsPolicy");
 
 app.MapControllers();
 

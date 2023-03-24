@@ -12,8 +12,9 @@ namespace Appointments.Calendars.Application{
         
         public async Task Create(Guid appointmentID
                                 , Guid CalendarId
-                                , DateTimeOffset startDateTime
-                                , DateTimeOffset endDateTime
+                                , DateTime startDateTime
+                                , DateTime endDateTime
+                                , string subject
                                 , string message
                                 , Guid fromUserID
                                 , IEnumerable<Receiver> receivers){
@@ -24,6 +25,7 @@ namespace Appointments.Calendars.Application{
                 , CalendarId
                 , startDateTime
                 , endDateTime
+                , subject
                 , message
                 , fromUserID
                 , receivers
