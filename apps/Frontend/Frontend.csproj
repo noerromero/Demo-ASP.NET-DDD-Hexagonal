@@ -15,4 +15,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.3" PrivateAssets="all" />
     <PackageReference Include="Radzen.Blazor" Version="4.7.13" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Models\Catalogs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Catalogs\" />
+  </ItemGroup>
 </Project>

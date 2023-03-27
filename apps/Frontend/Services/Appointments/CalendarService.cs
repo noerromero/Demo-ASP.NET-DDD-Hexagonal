@@ -1,11 +1,11 @@
-using Models.Appointments;
+using Frontend.Models.Appointments;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
 
 
 
-namespace Services.Appointments;
+namespace Frontend.Services.Appointments;
 
 public class CalendarService : ICalendarService{
     private HttpClient _httpClient;
@@ -23,5 +23,23 @@ public class CalendarService : ICalendarService{
         var result=  await _httpClient.GetFromJsonAsync<IList<Appointment>>
                                 ($"api/calendars/{calendarId}/appointments");
         return result;
+    }
+
+    public async Task CreateAppointment(Appointment appointment, Guid calendarId) {
+        await _httpClient.PostAsJsonAsync<Appointment>(
+                                $"api/calendars/{calendarId}/appointments"
+                                , appointment
+                                );
+        
+            
+
+
+    }
+
+    public async Task UpdateAppointment(Appointment appointment, Guid calendarId)
+    {
+        await _httpClient.PutAsJsonAsync<Appointment>(
+                                $"api/calendars/{calendarId}/appointments"
+                                , appointment);
     }
 }

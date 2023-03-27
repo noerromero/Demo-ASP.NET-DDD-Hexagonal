@@ -1,7 +1,7 @@
 namespace Backend.Controllers.Appointments.Models;
 
 public class AppointmentPostRequestDTO{
-    public string AppointmentId {get; set;} = string.Empty;
+    public Guid AppointmentId {get; set;}
     public DateTime StartDateTime {get; set;}
     public DateTime EndDateTime {get; set;}
     public string Subject { get; set; } = string.Empty;

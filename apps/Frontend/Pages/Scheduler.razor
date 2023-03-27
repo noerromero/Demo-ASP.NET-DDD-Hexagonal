@@ -1,6 +1,6 @@
 @page "/scheduler"
 
-@using Models.Appointments;
+@using Frontend.Models.Appointments;
 @using Services.Appointments;
 
 @inject DialogService DialogService
@@ -18,12 +18,12 @@
 @*<EventConsole @ref=@console />*@
 
 @code {
-    RadzenScheduler<Appointment> scheduler;
-    //EventConsole console;
-    Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
+        RadzenScheduler<Appointment> scheduler;
+        //EventConsole console;
+        Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
 
-    IList<Appointment> appointments;
-    Calendar calendar;
+        IList<Appointment> appointments;
+        Calendar calendar;
 
     protected async override Task OnInitializedAsync()
     {
@@ -32,7 +32,7 @@
 
             calendar = calendars.FirstOrDefault();
             appointments = await CalendarService.GetAppointmentsByCalendarId(
-                                    Guid.Parse(calendar.CalendarId)
+                                    calendar.CalendarId
                                 );
         }
 
@@ -63,6 +63,7 @@
         if (data != null)
         {
             appointments.Add(data);
+            await CalendarService.CreateAppointment(data, calendar.CalendarId);
             // Either call the Reload method or reassign the Data property of the Scheduler
             await scheduler.Reload();
         }
