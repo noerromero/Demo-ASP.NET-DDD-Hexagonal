@@ -1,4 +1,4 @@
-﻿namespace Frontend.Models.Appointments
+﻿namespace Frontend.Models.Pets
 {
 	public class Pet
 	{

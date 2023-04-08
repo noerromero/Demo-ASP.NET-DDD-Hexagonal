@@ -17,8 +17,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\Catalogs\" />
+    <None Remove="Pages\Helpers\" />
+    <None Remove="Models\Helpers\" />
+    <None Remove="Models\Pets\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Catalogs\" />
+    <Folder Include="Pages\Helpers\" />
+    <Folder Include="Models\Helpers\" />
+    <Folder Include="Models\Pets\" />
   </ItemGroup>
 </Project>

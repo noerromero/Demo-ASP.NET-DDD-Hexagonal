@@ -1,4 +1,4 @@
-namespace Frontend.Models.Appointments;
+namespace Frontend.Models.Calendars;
 
 public class Calendar{
     public Guid CalendarId { get; set; }

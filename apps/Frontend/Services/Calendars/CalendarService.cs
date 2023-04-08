@@ -1,11 +1,11 @@
-using Frontend.Models.Appointments;
+using Frontend.Models.Calendars;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
 
 
 
-namespace Frontend.Services.Appointments;
+namespace Frontend.Services.Calendars;
 
 public class CalendarService : ICalendarService{
     private HttpClient _httpClient;

@@ -1,6 +1,6 @@
-using Frontend.Models.Appointments;
+using Frontend.Models.Calendars;
 
-namespace Frontend.Services.Appointments;
+namespace Frontend.Services.Calendars;
 public interface ICalendarService{
     Task<IEnumerable<Calendar>> GetCalendarByUserId (Guid userId);
     Task<IList<Appointment>> GetAppointmentsByCalendarId(Guid calendarId);

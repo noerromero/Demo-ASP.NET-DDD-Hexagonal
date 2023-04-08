@@ -1,7 +1,9 @@
 @page "/addappointmentpage"
 
-@using Frontend.Models.Appointments;
+@using Frontend.Models.Calendars;
 @using Frontend.Models.Catalogs;
+@using Frontend.Models.Pets;
+@using Frontend.Models.Helpers;
 
 @inject DialogService DialogService
 
@@ -12,30 +14,40 @@
             <RadzenLabel Text="Start" />
         </div>
         <div class="col">
-            <RadzenDatePicker @bind-Value="@model.StartDateTime" Name="Start" ShowTime="true" />
+            <RadzenDatePicker @bind-Value="@model.StartDateTime" Name="Start" ShowTime="false"
+                              DateFormat="dd/MM/yyyy" Style="width: 100%; max-width: 150px;" />
             <RadzenRequiredValidator Text="Start is required" Component="Start" />
+            <RadzenNumeric Min="0" Max="24" @bind-Value=@StartHour Style="width: 100%; max-width: 100px;" Name="StartHour"/>
+            <RadzenNumeric Min="0" Max="45" Step="15" @bind-Value=@StartMinute Style="width: 100%; max-width: 100px;" Name="StartMinute" />
+            
         </div>
     </div>
+
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
             <RadzenLabel Text="End" />
         </div>
         <div class="col">
-            <RadzenDatePicker Name="End" @bind-Value="@model.EndDateTime" ShowTime="true" />
+            <RadzenDatePicker Name="End" @bind-Value="@model.EndDateTime" ShowTime="false"
+                              DateFormat="dd/MM/yyyy" Style="width: 100%; max-width: 150px;" />
             <RadzenRequiredValidator Component="End" Text="End is required" />
+            <RadzenNumeric Min="0" Max="24" @bind-Value=@EndHour Style="width: 100%; max-width: 100px;"/>
+            <RadzenNumeric Min="0" Max="45" Step="15" @bind-Value=@EndMinute Style="width: 100%; max-width: 100px;"/>
         </div>
     </div>
+
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
             <RadzenLabel Text="Service" />
         </div>
         <div class="col">
             <RadzenDropDown TValue="Service" Data=@dataServices TextProperty="Description" ValueProperty="ServiceId"
-                            Style="width: 100%; max-width: 400px;" Value=@service.ServiceId
+                            Style="width: 100%; max-width: 350px;" Value=@service.ServiceId
                             SelectedItem=@service SelectedItemChanged=@OnChangeService Name="ServiceControl"/>
             
         </div>
     </div>
+
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
             <RadzenLabel Text="Pet" />
@@ -43,11 +55,12 @@
         <div class="col">
             <RadzenDropDown Data=@dataPets TextProperty="Name" ValueProperty="Name"
                             Multiple=true AllowClear=true Placeholder="Select pets" Chips=true
-                            Style="width: 100%; max-width: 400px;"
+                            Style="width: 100%; max-width: 350px;"
                             @bind-Value=@pets Name="PetsControl"/>
             <RadzenRequiredValidator Component="PetsControl" Text="Pet is required" />
         </div>
     </div>
+
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
             <RadzenLabel Text="Helper" />
@@ -61,7 +74,7 @@
         <div class="col-md-3"></div>
         <div class="col">
             <RadzenButton ButtonType="ButtonType.Submit" Text="Save" />
-            <RadzenButton Text="Cancel" ButtonStyle="ButtonStyle.Secondary" />
+            <RadzenButton Text="Cancel" ButtonType="ButtonType.Button" ButtonStyle="ButtonStyle.Secondary" Click="@(args => DialogService.Close())"/>
         </div>
     </div>
 </RadzenTemplateForm>
@@ -88,6 +101,14 @@
         , Name = "Giovanni" };
 
 
+    public int StartHour { get; set; }
+
+    public int StartMinute { get; set; }
+
+    public int EndHour { get; set; }
+
+    public int EndMinute { get; set; }
+
     [Parameter]
     public DateTime Start { get; set; }
 
@@ -99,6 +120,8 @@
     protected async override Task OnInitializedAsync()
     {
         service = dataServices.FirstOrDefault();
+        StartHour = 8;
+        EndHour = StartHour + 1;
 
     }
 
@@ -110,6 +133,9 @@
 
     void OnSubmit(Appointment model)
     {
+
+        model.StartDateTime = new DateTime(model.StartDateTime.Year, model.StartDateTime.Month, model.StartDateTime.Day, StartHour, StartMinute, 0);
+        model.EndDateTime = new DateTime(model.EndDateTime.Year, model.EndDateTime.Month, model.EndDateTime.Day, EndHour, EndMinute, 0);
 
 
         var newAppointmentId = Guid.NewGuid();
@@ -133,6 +159,7 @@
         service = value as Service;
 
     }
+
 
 
     }

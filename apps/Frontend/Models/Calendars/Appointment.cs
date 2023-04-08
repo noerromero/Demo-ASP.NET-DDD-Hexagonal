@@ -1,4 +1,4 @@
-namespace Frontend.Models.Appointments;
+namespace Frontend.Models.Calendars;
 public class Appointment
 {
     public Guid? AppointmentId { get; set; }
@@ -11,4 +11,6 @@ public class Appointment
     public Guid FromUserId { get; set; } 
 
     public IEnumerable<Receiver> receivers { get; set; } = new List<Receiver>();
+
+    
 }

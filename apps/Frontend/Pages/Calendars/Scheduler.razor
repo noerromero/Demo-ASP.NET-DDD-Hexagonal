@@ -1,7 +1,7 @@
 @page "/scheduler"
 
-@using Frontend.Models.Appointments;
-@using Services.Appointments;
+@using Frontend.Models.Calendars;
+@using Services.Calendars;
 
 @inject DialogService DialogService
 @inject ICalendarService CalendarService 
@@ -9,8 +9,8 @@
 <RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender style="height: 768px;" TItem="Appointment" Data=@appointments StartProperty="StartDateTime" EndProperty="EndDateTime"
     TextProperty="Subject" SelectedIndex="2"
     SlotSelect=@OnSlotSelect AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
-    <RadzenDayView />
-    <RadzenWeekView />
+    <RadzenDayView  StartTime=@TimeSpan.FromHours(6)/>
+    <RadzenWeekView  StartTime=@TimeSpan.FromHours(6)/>
     <RadzenMonthView />
     <RadzenYearView />
 </RadzenScheduler>
@@ -18,12 +18,12 @@
 @*<EventConsole @ref=@console />*@
 
 @code {
-        RadzenScheduler<Appointment> scheduler;
-        //EventConsole console;
-        Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
+    RadzenScheduler<Appointment> scheduler;
+    //EventConsole console;
+    Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
 
-        IList<Appointment> appointments;
-        Calendar calendar;
+    IList<Appointment> appointments;
+    Calendar calendar;
 
     protected async override Task OnInitializedAsync()
     {
@@ -58,7 +58,7 @@
         //console.Log($"SlotSelect: Start={args.Start} End={args.End}");
 
         Appointment data = await DialogService.OpenAsync<AddAppointmentPage>("Add Appointment",
-            new Dictionary<string, object> { { "Start", args.Start }, { "End", args.End } });
+            new Dictionary<string, object> { { "Start", args.Start }, { "End", args.End.AddDays(-1) } });
 
         if (data != null)
         {
@@ -73,9 +73,17 @@
     {
         //console.Log($"AppointmentSelect: Appointment={args.Data.Text}");
 
-        await DialogService.OpenAsync<EditAppointmentPage>("Edit Appointment", new Dictionary<string, object> { { "Appointment", args.Data } });
+        Appointment data = await DialogService.OpenAsync<EditAppointmentPage>("Edit Appointment", new Dictionary<string, object> { { "Appointment", args.Data } });
 
-        await scheduler.Reload();
+        if (data != null) {
+            var appointmentUpdate = appointments.Where(x => x.AppointmentId == data.AppointmentId)
+                                                .FirstOrDefault();
+
+            appointmentUpdate = data;
+            await CalendarService.UpdateAppointment(data, calendar.CalendarId);
+            await scheduler.Reload();
+        }
+
     }
 
     void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<Appointment> args)
