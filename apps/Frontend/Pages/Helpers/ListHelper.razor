@@ -16,16 +16,35 @@
             </RadzenColumn>
         </RadzenRow>
 
-            <hr style="border: none; background-color: rgba(0,0,0,.08); height: 1px; margin: 1rem 0;" />
+
             *@
+
+            <RadzenRow Gap="0.5rem">
+                <RadzenColumn Size="4" Class="rz-text-truncate">
+                    
+                </RadzenColumn>
+                <RadzenColumn Size="8" Class="rz-text-align-right">
+                    <RadzenLink Path="scheduler/E37C8D1F-04BE-402E-A584-EFD46DBC3BE9" Text="Go to my calendar" Style="font-size:small; color:blue" />
+                </RadzenColumn>
+            </RadzenRow>
+
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem">
                 <RadzenImage Path=@helperItem.PicturePath Class="rz-border-radius-10" Style="width: 80px; height: 80px;" />
                 <RadzenStack Gap="0">
                     <RadzenText TextStyle="TextStyle.Subtitle1" Class="rz-mb-0"><strong>@helperItem.Name</strong></RadzenText>
                     <RadzenText TextStyle="TextStyle.Body2" Class="rz-mb-0">@helperItem.AboutMe</RadzenText>
-                    <RadzenText TextStyle="TextStyle.Caption" Class="rz-mb-0">@helperItem.Name</RadzenText>
+
                 </RadzenStack>
             </RadzenStack>
+
+            <RadzenRow Gap="0.5rem">
+                <RadzenColumn Size="4" Class="rz-text-truncate">
+
+                </RadzenColumn>
+                <RadzenColumn Size="8" Class="rz-text-align-right">
+                    <RadzenRating @bind-Value=@helperItem.Rating ReadOnly=true />
+                </RadzenColumn>
+            </RadzenRow>
         </RadzenCard>
     </Template>
 </RadzenDataList>
@@ -38,9 +57,9 @@
         await base.OnInitializedAsync();
 
         helpers = new List<Helper> {
-                new Helper {  HelperId= Guid.NewGuid(), Name = "Noe", AboutMe="I love dogs", PicturePath="https://imagizer.imageshack.com/img922/1808/xksXc9.png" },
-                new Helper {  HelperId= Guid.NewGuid(), Name = "Giovanni", AboutMe="I like to rescue dogs", PicturePath="https://imagizer.imageshack.com/img922/1808/xksXc9.png" },
-                new Helper {  HelperId= Guid.NewGuid(), Name = "Angelica", AboutMe="Cats are my life", PicturePath = "https://imagizer.imageshack.com/img922/1808/xksXc9.png"}
+                new Helper {  HelperId= Guid.NewGuid(), Name = "Noe", AboutMe="I love dogs", PicturePath="https://imagizer.imageshack.com/img922/1808/xksXc9.png" , Rating=3},
+                new Helper {  HelperId= Guid.NewGuid(), Name = "Giovanni", AboutMe="I like to rescue dogs", PicturePath="https://imagizer.imageshack.com/img922/1808/xksXc9.png", Rating=4 },
+                new Helper {  HelperId= Guid.NewGuid(), Name = "Angelica", AboutMe="Cats are my life", PicturePath = "https://imagizer.imageshack.com/img922/1808/xksXc9.png", Rating=2}
         };
     }
 

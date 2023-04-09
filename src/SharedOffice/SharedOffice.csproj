@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Users\" />
+    <None Remove="Users\Application\" />
+    <None Remove="Users\Domain\" />
+    <None Remove="Users\Infrastructure\" />
+    <None Remove="Shared\" />
+    <None Remove="Shared\Infrastructure\" />
+    <None Remove="Shared\Infrastructure\Persistence\" />
+    <None Remove="Shared\Infrastructure\Persistence\EntityFramework\" />
+    <None Remove="Shared\Infrastructure\Persistence\EntityFramework\EntityConfigurations\" />
+    <None Remove="Users\Infrastructure\Persistence\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Users\" />
+    <Folder Include="Users\Application\" />
+    <Folder Include="Users\Domain\" />
+    <Folder Include="Users\Infrastructure\" />
+    <Folder Include="Shared\" />
+    <Folder Include="Shared\Infrastructure\" />
+    <Folder Include="Shared\Infrastructure\Persistence\" />
+    <Folder Include="Shared\Infrastructure\Persistence\EntityFramework\" />
+    <Folder Include="Shared\Infrastructure\Persistence\EntityFramework\EntityConfigurations\" />
+    <Folder Include="Users\Infrastructure\Persistence\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedCore\SharedCore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.12">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.12" />
+  </ItemGroup>
+</Project>

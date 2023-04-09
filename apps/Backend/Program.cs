@@ -2,7 +2,9 @@ using Appointments.Calendars.Domain;
 using Appointments.Shared.Infrastructure.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Appointments.Calendars.Infrastructure.Persistence;
-
+using SharedOffice.Shared.Infrastructure.Persistence.EntityFramework;
+using SharedOffice.Users.Domain;
+using SharedOffice.Users.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +21,13 @@ builder.Services.AddDbContext<AppointmentsContext>(x => {
 });
 
 //add manually
+builder.Services.AddDbContext<SharedOfficeContext>(x => {
+    x.UseSqlite(builder.Configuration.GetConnectionString("SharedOfficeConnection"));
+});
+
+//add manually
 builder.Services.AddScoped<ICalendarRepository, SQLiteCalendarRepository>();
+builder.Services.AddScoped<IUserRepository, SQLiteUserRepository>();
 
 //add manually
 builder.Services.AddAutoMapper(typeof(Program),typeof(Appointment));

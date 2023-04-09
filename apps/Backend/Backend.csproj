@@ -14,5 +14,18 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Appointments\Appointments.csproj" />
+    <ProjectReference Include="..\..\src\SharedOffice\SharedOffice.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controllers\Users\" />
+    <None Remove="Controllers\Users\Models\" />
+    <None Remove="Controllers\Users\Profiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Users\" />
+    <Folder Include="Controllers\Users\Models\" />
+    <Folder Include="Controllers\Users\Profiles\" />
   </ItemGroup>
 </Project>

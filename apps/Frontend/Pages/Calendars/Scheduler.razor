@@ -1,4 +1,4 @@
-@page "/scheduler"
+@page "/scheduler/{calendarId}"
 
 @using Frontend.Models.Calendars;
 @using Services.Calendars;
@@ -18,6 +18,10 @@
 @*<EventConsole @ref=@console />*@
 
 @code {
+    [Parameter]
+    public string CalendarId { get; set; }
+
+
     RadzenScheduler<Appointment> scheduler;
     //EventConsole console;
     Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
@@ -27,7 +31,9 @@
 
     protected async override Task OnInitializedAsync()
     {
-        var calendars = await CalendarService.GetCalendarByUserId(Guid.Parse("E37C8D1F-04BE-402E-A584-EFD46DBC3BE9"));
+        if (CalendarId == null)
+            throw new ArgumentNullException(nameof(CalendarId));
+        var calendars = await CalendarService.GetCalendarByUserId(Guid.Parse(CalendarId));
         if (calendars.FirstOrDefault() != null) {
 
             calendar = calendars.FirstOrDefault();
