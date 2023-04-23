@@ -10,7 +10,7 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
     public void Configure(EntityTypeBuilder<Appointment> builder)
     {
         //Name of table
-        builder.ToTable(nameof(AppointmentsContext.Appointments).ToDatabaseFormat());
+        builder.ToTable(nameof(FrontOfficeContext.Appointments).ToDatabaseFormat());
 
         //Id of table
         builder.HasKey(x => x.Id);

@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FrontOffice.Shared.Infrastructure.Persistence.EntityFramework
 {
-    public class AppointmentsContext: DbContext
+    public class FrontOfficeContext: DbContext
     {
-        public AppointmentsContext(DbContextOptions<AppointmentsContext> options) : base(options)
+        public FrontOfficeContext(DbContextOptions<FrontOfficeContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

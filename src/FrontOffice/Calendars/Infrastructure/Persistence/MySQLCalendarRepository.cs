@@ -1,69 +1,136 @@
 ﻿
 
 using FrontOffice.Calendars.Domain;
+using FrontOffice.Shared.Infrastructure.Persistence.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 namespace FrontOffice.Calendars.Infrastructure.Persistence
 {
     public class MySQLCalendarRepository : ICalendarRepository
     {
-        public MySQLCalendarRepository(Appointment context)
+        private FrontOfficeContext _context;
+
+        public MySQLCalendarRepository(FrontOfficeContext context)
         {
-            
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Task<bool> AppointmentExists(Guid appointmentID)
+        public async Task<bool> AppointmentExists(Guid appointmentID)
         {
-            throw new NotImplementedException();
+            return await _context.Appointments.AnyAsync(x => x.Id == appointmentID);
         }
 
-        public Task<bool> CalendarExists(Guid calendarId)
+        public async Task<bool> CalendarExists(Guid calendarId)
         {
-            throw new NotImplementedException();
+            return await _context.Calendars.AnyAsync(x => x.Id == calendarId);
         }
 
-        public Task CreateAppointment(Appointment appointment)
+        public async Task CreateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                await _context.Appointments.AddAsync(appointment);
+                //await _context.SaveChangesAsync();
+
+                await _context.Receivers.AddRangeAsync(appointment.Receivers);
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw new ApplicationException("Transaction failed");
+            }
         }
 
-        public Task CreateCalendar(Calendar calendar)
+        public async Task CreateCalendar(Calendar calendar)
         {
-            throw new NotImplementedException();
+            await _context.Calendars.AddAsync(calendar);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAppointment(Appointment appointment)
+        public async Task DeleteAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var receiversForDelete = _context.Receivers
+                                            .Where(x => x.AppointmentId == appointment.Id).ToList();
+                _context.Receivers.RemoveRange(receiversForDelete);
+
+                _context.Appointments.Remove(appointment);
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw new ApplicationException("Transaction failed");
+            }
         }
 
-        public Task PartialUpdateAppointment(Appointment appointment)
+        public async Task PartialUpdateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            _context.Entry(appointment).State = EntityState.Modified;
+            _context.Entry(appointment.RangeOfDates).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Appointment?> SearchAppointmentByID(Guid appointmentId, bool includeReceivers)
+        public async Task<Appointment?> SearchAppointmentByID(Guid appointmentId, bool includeReceivers)
         {
-            throw new NotImplementedException();
+            if (includeReceivers)
+                return await _context.Appointments.Include(r => r.Receivers)
+                                .FirstOrDefaultAsync(x => x.Id == appointmentId);
+
+            return await _context.Appointments
+                                .FirstOrDefaultAsync(x => x.Id == appointmentId);
         }
 
-        public Task<IEnumerable<Appointment>> SearchAppointmentsByCalendarId(Guid calendarId)
+        public async Task<IEnumerable<Appointment>> SearchAppointmentsByCalendarId(Guid calendarId)
         {
-            throw new NotImplementedException();
+            return await _context.Appointments
+                                .Where(x => x.CalendarId == calendarId)
+                                .ToListAsync();
         }
 
-        public Task<Calendar?> SearchCalendarById(Guid calendarId)
+        public async Task<Calendar?> SearchCalendarById(Guid calendarId)
         {
-            throw new NotImplementedException();
+            return await _context.Calendars.FirstOrDefaultAsync(x => x.Id == calendarId);
         }
 
-        public Task<IEnumerable<Calendar>> SearchCalendarsByUserId(Guid userId)
+        public async Task<IEnumerable<Calendar>> SearchCalendarsByUserId(Guid userId)
         {
-            throw new NotImplementedException();
+            return await _context.Calendars.Where(x => x.UserId == userId).ToListAsync();
         }
 
-        public Task UpdateAppointment(Appointment appointment)
+        public async Task UpdateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var receiversForDelete = _context.Receivers
+                                            .Where(x => x.AppointmentId == appointment.Id).ToList();
+                _context.Receivers.RemoveRange(receiversForDelete);
+
+                await _context.Receivers.AddRangeAsync(appointment.Receivers);
+
+
+                _context.Appointments.Attach(appointment);
+                _context.Entry(appointment).State = EntityState.Modified;
+                _context.Entry(appointment.RangeOfDates).State = EntityState.Modified;
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw new ApplicationException("Transaction failed");
+            }
         }
     }
 }

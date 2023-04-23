@@ -6,9 +6,9 @@ namespace FrontOffice.Calendars.Infrastructure.Persistence;
 
 public class SQLiteCalendarRepository : ICalendarRepository
 {
-    private AppointmentsContext _context;
+    private FrontOfficeContext _context;
 
-    public SQLiteCalendarRepository(AppointmentsContext context){
+    public SQLiteCalendarRepository(FrontOfficeContext context){
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
     public async Task<bool> CalendarExists(Guid calendarId)

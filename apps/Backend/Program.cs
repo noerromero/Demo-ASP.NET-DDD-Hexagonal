@@ -15,9 +15,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//add manually
-builder.Services.AddDbContext<AppointmentsContext>(x => {
-    x.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+/*//add manually
+builder.Services.AddDbContext<FrontOfficeContext>(x => {
+    x.UseSqlite(builder.Configuration.GetConnectionString("FronOfficeConnection"));
+});*/
+
+builder.Services.AddDbContext<FrontOfficeContext>(x => {
+    x.UseMySQL(builder.Configuration.GetConnectionString("FronOfficeConnection"));
 });
 
 //add manually
@@ -26,7 +30,8 @@ builder.Services.AddDbContext<SharedOfficeContext>(x => {
 });
 
 //add manually
-builder.Services.AddScoped<ICalendarRepository, SQLiteCalendarRepository>();
+//builder.Services.AddScoped<ICalendarRepository, SQLiteCalendarRepository>(); Use this line for sqlite
+builder.Services.AddScoped<ICalendarRepository, MySQLCalendarRepository>();
 builder.Services.AddScoped<IUserRepository, SQLiteUserRepository>();
 
 //add manually

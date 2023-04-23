@@ -10,7 +10,7 @@ public class CalendarConfiguration : IEntityTypeConfiguration<Calendar>
     public void Configure(EntityTypeBuilder<Calendar> builder)
     {
         //Name of table
-        builder.ToTable(nameof(AppointmentsContext.Calendars).ToDatabaseFormat());
+        builder.ToTable(nameof(FrontOfficeContext.Calendars).ToDatabaseFormat());
 
         //Id of table
         builder.HasKey(x => x.Id);

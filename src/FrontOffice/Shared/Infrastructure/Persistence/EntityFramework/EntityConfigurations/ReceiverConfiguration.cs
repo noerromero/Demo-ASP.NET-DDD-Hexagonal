@@ -9,7 +9,7 @@ public class ReceiverConfiguration : IEntityTypeConfiguration<Receiver>
 {
     public void Configure(EntityTypeBuilder<Receiver> builder)
     {
-         builder.ToTable(nameof(AppointmentsContext.Receivers).ToDatabaseFormat());
+         builder.ToTable(nameof(FrontOfficeContext.Receivers).ToDatabaseFormat());
 
         //Id of table
         builder.HasKey(x => x.Id);
