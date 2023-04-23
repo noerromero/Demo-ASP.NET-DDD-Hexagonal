@@ -1,4 +1,4 @@
-namespace Appointments.Calendars.Domain;
+namespace FrontOffice.Calendars.Domain;
 
 public interface ICalendarRepository 
 {

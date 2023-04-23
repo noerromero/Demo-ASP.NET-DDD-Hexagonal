@@ -1,7 +1,7 @@
-using Appointments.Calendars.Domain;
-using Appointments.Shared.Infrastructure.Persistence.EntityFramework;
+using FrontOffice.Calendars.Domain;
+using FrontOffice.Shared.Infrastructure.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
-using Appointments.Calendars.Infrastructure.Persistence;
+using FrontOffice.Calendars.Infrastructure.Persistence;
 using SharedOffice.Shared.Infrastructure.Persistence.EntityFramework;
 using SharedOffice.Users.Domain;
 using SharedOffice.Users.Infrastructure.Persistence;

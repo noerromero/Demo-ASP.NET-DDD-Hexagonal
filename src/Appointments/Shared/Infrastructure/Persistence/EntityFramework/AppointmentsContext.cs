@@ -1,10 +1,10 @@
 
 
-using Appointments.Calendars.Domain;
-using Appointments.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
+using FrontOffice.Calendars.Domain;
+using FrontOffice.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Appointments.Shared.Infrastructure.Persistence.EntityFramework
+namespace FrontOffice.Shared.Infrastructure.Persistence.EntityFramework
 {
     public class AppointmentsContext: DbContext
     {

@@ -1,6 +1,6 @@
 using SharedCore.Domain.ValueObject;
 
-namespace Appointments.Calendars.Domain;
+namespace FrontOffice.Calendars.Domain;
 
 public class RangeOfDate : ValueObject
 {

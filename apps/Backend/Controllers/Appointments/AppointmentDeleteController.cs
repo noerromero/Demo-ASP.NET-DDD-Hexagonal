@@ -1,5 +1,5 @@
-using Appointments.Calendars.Application;
-using Appointments.Calendars.Domain;
+using FrontOffice.Calendars.Application;
+using FrontOffice.Calendars.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;

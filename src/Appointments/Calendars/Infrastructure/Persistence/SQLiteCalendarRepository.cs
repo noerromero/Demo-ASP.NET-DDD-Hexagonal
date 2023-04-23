@@ -1,8 +1,8 @@
-using Appointments.Calendars.Domain;
-using Appointments.Shared.Infrastructure.Persistence.EntityFramework;
+using FrontOffice.Calendars.Domain;
+using FrontOffice.Shared.Infrastructure.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
-namespace Appointments.Calendars.Infrastructure.Persistence;
+namespace FrontOffice.Calendars.Infrastructure.Persistence;
 
 public class SQLiteCalendarRepository : ICalendarRepository
 {

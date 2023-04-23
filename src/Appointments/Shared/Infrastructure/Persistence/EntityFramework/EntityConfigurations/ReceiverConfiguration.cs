@@ -1,9 +1,9 @@
-using Appointments.Calendars.Domain;
+using FrontOffice.Calendars.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SharedCore.Infrastructure.Persistence.EntityFramework.Extension;
 
-namespace Appointments.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
+namespace FrontOffice.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
 
 public class ReceiverConfiguration : IEntityTypeConfiguration<Receiver>
 {
