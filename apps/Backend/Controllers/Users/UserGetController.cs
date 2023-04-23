@@ -1,5 +1,5 @@
 ﻿
-using FrontOffice.Calendars.Application;
+using HelperServices.Calendars.Application;
 using AutoMapper;
 using Backend.Controllers.Appointments.Models;
 using Backend.Controllers.Users.Models;

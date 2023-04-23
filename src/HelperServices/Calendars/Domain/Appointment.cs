@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using SharedCore.Domain.Entity;
 
-namespace FrontOffice.Calendars.Domain
+namespace HelperServices.Calendars.Domain
 {
     public class Appointment : BaseEntity<Guid>
     {

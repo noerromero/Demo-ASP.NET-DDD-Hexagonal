@@ -1,6 +1,6 @@
 using SharedCore.Domain.Entity;
 
-namespace FrontOffice.Calendars.Domain;
+namespace HelperServices.Calendars.Domain;
 
 public class Receiver : BaseEntity<Guid>
 {

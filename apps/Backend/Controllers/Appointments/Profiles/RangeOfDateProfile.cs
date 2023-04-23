@@ -1,4 +1,4 @@
-using FrontOffice.Calendars.Domain;
+using HelperServices.Calendars.Domain;
 using AutoMapper;
 using Backend.Controllers.Appointments.Models;
 

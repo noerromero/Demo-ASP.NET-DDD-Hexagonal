@@ -1,7 +1,7 @@
-using FrontOffice.Calendars.Domain;
-using FrontOffice.Shared.Infrastructure.Persistence.EntityFramework;
+using HelperServices.Calendars.Domain;
+using HelperServices.Shared.Infrastructure.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
-using FrontOffice.Calendars.Infrastructure.Persistence;
+using HelperServices.Calendars.Infrastructure.Persistence;
 using SharedOffice.Shared.Infrastructure.Persistence.EntityFramework;
 using SharedOffice.Users.Domain;
 using SharedOffice.Users.Infrastructure.Persistence;
@@ -20,7 +20,7 @@ builder.Services.AddDbContext<FrontOfficeContext>(x => {
     x.UseSqlite(builder.Configuration.GetConnectionString("FronOfficeConnection"));
 });*/
 
-builder.Services.AddDbContext<FrontOfficeContext>(x => {
+builder.Services.AddDbContext<HelperServicesContext>(x => {
     x.UseMySQL(builder.Configuration.GetConnectionString("FronOfficeConnection"));
 });
 

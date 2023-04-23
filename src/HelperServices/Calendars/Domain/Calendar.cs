@@ -1,7 +1,7 @@
 using SharedCore.Domain.Entity;
 using SharedCore.Domain.Aggregate;
 
-namespace FrontOffice.Calendars.Domain{
+namespace HelperServices.Calendars.Domain{
     public class Calendar : BaseEntity<Guid> , IAggregateRoot
     {
         public Guid UserId {get; private set;}

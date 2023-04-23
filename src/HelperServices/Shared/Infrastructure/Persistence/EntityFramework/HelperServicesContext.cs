@@ -1,14 +1,14 @@
 
 
-using FrontOffice.Calendars.Domain;
-using FrontOffice.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
+using HelperServices.Calendars.Domain;
+using HelperServices.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace FrontOffice.Shared.Infrastructure.Persistence.EntityFramework
+namespace HelperServices.Shared.Infrastructure.Persistence.EntityFramework
 {
-    public class FrontOfficeContext: DbContext
+    public class HelperServicesContext: DbContext
     {
-        public FrontOfficeContext(DbContextOptions<FrontOfficeContext> options) : base(options)
+        public HelperServicesContext(DbContextOptions<HelperServicesContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

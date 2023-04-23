@@ -1,5 +1,5 @@
-using FrontOffice.Calendars.Application;
-using FrontOffice.Calendars.Domain;
+using HelperServices.Calendars.Application;
+using HelperServices.Calendars.Domain;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 

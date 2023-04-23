@@ -1,16 +1,16 @@
-using FrontOffice.Calendars.Domain;
+using HelperServices.Calendars.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SharedCore.Infrastructure.Persistence.EntityFramework.Extension;
 
-namespace FrontOffice.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
+namespace HelperServices.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
 
 public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
 {
     public void Configure(EntityTypeBuilder<Appointment> builder)
     {
         //Name of table
-        builder.ToTable(nameof(FrontOfficeContext.Appointments).ToDatabaseFormat());
+        builder.ToTable(nameof(HelperServicesContext.Appointments).ToDatabaseFormat());
 
         //Id of table
         builder.HasKey(x => x.Id);

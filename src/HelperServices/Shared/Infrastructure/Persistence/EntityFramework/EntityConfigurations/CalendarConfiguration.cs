@@ -1,16 +1,16 @@
 using Microsoft.EntityFrameworkCore;
-using FrontOffice.Calendars.Domain;
+using HelperServices.Calendars.Domain;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SharedCore.Infrastructure.Persistence.EntityFramework.Extension;
 
-namespace FrontOffice.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
+namespace HelperServices.Shared.Infrastructure.Persistence.EntityFramework.EntityConfigurations;
 
 public class CalendarConfiguration : IEntityTypeConfiguration<Calendar>
 {
     public void Configure(EntityTypeBuilder<Calendar> builder)
     {
         //Name of table
-        builder.ToTable(nameof(FrontOfficeContext.Calendars).ToDatabaseFormat());
+        builder.ToTable(nameof(HelperServicesContext.Calendars).ToDatabaseFormat());
 
         //Id of table
         builder.HasKey(x => x.Id);

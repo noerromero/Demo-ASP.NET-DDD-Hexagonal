@@ -1,6 +1,6 @@
-using FrontOffice.Calendars.Domain;
+using HelperServices.Calendars.Domain;
 
-namespace FrontOffice.Calendars.Application
+namespace HelperServices.Calendars.Application
 {
     public class AppointmentSearcher
     {

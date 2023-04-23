@@ -1,14 +1,14 @@
-using FrontOffice.Calendars.Domain;
-using FrontOffice.Shared.Infrastructure.Persistence.EntityFramework;
+using HelperServices.Calendars.Domain;
+using HelperServices.Shared.Infrastructure.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
-namespace FrontOffice.Calendars.Infrastructure.Persistence;
+namespace HelperServices.Calendars.Infrastructure.Persistence;
 
 public class SQLiteCalendarRepository : ICalendarRepository
 {
-    private FrontOfficeContext _context;
+    private HelperServicesContext _context;
 
-    public SQLiteCalendarRepository(FrontOfficeContext context){
+    public SQLiteCalendarRepository(HelperServicesContext context){
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
     public async Task<bool> CalendarExists(Guid calendarId)
