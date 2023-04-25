@@ -1,6 +1,6 @@
 ﻿
 using AutoMapper;
-using Backend.Controllers.Appointments.Models;
+using Backend.Controllers.Appointments.Dtos;
 using Backend.Controllers.Users.Models;
 using SharedOffice.Users.Domain;
 

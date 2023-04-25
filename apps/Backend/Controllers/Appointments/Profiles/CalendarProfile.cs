@@ -1,6 +1,6 @@
 using HelperServices.Calendars.Domain;
 using AutoMapper;
-using Backend.Controllers.Appointments.Models;
+using Backend.Controllers.Appointments.Dtos;
 
 namespace Backend.Controllers.Appointments.Profiles
 {

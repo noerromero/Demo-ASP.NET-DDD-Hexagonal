@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HelperServices.Calendars.Domain;
 using HelperServices.Calendars.Application;
-using Backend.Controllers.Appointments.Models;
+using Backend.Controllers.Appointments.Dtos;
 using AutoMapper;
 
 namespace Backend.Controllers;

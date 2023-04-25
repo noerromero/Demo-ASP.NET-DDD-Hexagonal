@@ -1,4 +1,4 @@
-namespace Backend.Controllers.Appointments.Models;
+namespace Backend.Controllers.Appointments.Dtos;
 public class AppointmentWhitoutReceiverGetResponseDTO{
     public string AppointmentId {get; set;} = string.Empty;
     public string CalendarId {get; set;} = string.Empty;

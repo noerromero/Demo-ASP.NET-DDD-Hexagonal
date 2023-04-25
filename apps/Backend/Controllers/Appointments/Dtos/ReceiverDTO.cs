@@ -1,4 +1,4 @@
-namespace Backend.Controllers.Appointments.Models;
+namespace Backend.Controllers.Appointments.Dtos;
 
 public class ReceiverDTO{
     public Guid ReceiverId {get; set;} 

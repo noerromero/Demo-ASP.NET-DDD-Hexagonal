@@ -1,7 +1,7 @@
 ﻿
 using HelperServices.Calendars.Application;
 using AutoMapper;
-using Backend.Controllers.Appointments.Models;
+using Backend.Controllers.Appointments.Dtos;
 using Backend.Controllers.Users.Models;
 using Microsoft.AspNetCore.Mvc;
 using SharedOffice.Users.Application;
