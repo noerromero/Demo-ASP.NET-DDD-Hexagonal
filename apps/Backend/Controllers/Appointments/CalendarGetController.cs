@@ -1,5 +1,5 @@
-using Appointments.Calendars.Application;
-using Appointments.Calendars.Domain;
+using HelperServices.Calendars.Application;
+using HelperServices.Calendars.Domain;
 using AutoMapper;
 using Backend.Controllers.Appointments.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +19,17 @@ public class CalendarGetController : ControllerBase
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
+    /* This method is not recommended because it's a get with body parameters
     [HttpGet]
     public async Task<IActionResult> GetByUserId([FromBody] CalendarGetRequestDTO calendarGetRequestDTO){
         var calendars = await _calendarSearcher.SearchByUserId(calendarGetRequestDTO.UserId);
+        return Ok(_mapper.Map<IEnumerable<CalendarGetResponseDTO>>(calendars));
+    }*/
+
+    [HttpGet]
+    public async Task<IActionResult> GetByUserId(Guid userId)
+    {
+        var calendars = await _calendarSearcher.SearchByUserId(userId);
         return Ok(_mapper.Map<IEnumerable<CalendarGetResponseDTO>>(calendars));
     }
 

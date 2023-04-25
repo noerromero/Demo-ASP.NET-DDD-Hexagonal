@@ -1,0 +1,155 @@
+@page "/editappointmentpage"
+
+@using Frontend.Models.Calendars;
+@using Frontend.Models.Catalogs;
+@using Frontend.Models.Pets;
+@using Frontend.Models.Helpers;
+
+@inject DialogService DialogService
+
+<RadzenTemplateForm TItem="Appointment" Data="@model" Submit=@OnSubmit>
+
+
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="Start" />
+        </div>
+        <div class="col">
+            <RadzenDatePicker @bind-Value="@model.StartDateTime" Name="Start" ShowTime="false"
+                              DateFormat="dd/MM/yyyy" Style="width: 100%; max-width: 150px;" />
+            <RadzenRequiredValidator Text="Start is required" Component="Start" />
+            <RadzenNumeric Min="0" Max="24" @bind-Value=@StartHour Style="width: 100%; max-width: 100px;" Name="StartHour" />
+            <RadzenNumeric Min="0" Max="45" Step="15" @bind-Value=@StartMinute Style="width: 100%; max-width: 100px;" Name="StartMinute" />
+
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="End" />
+        </div>
+        <div class="col">
+            <RadzenDatePicker Name="End" @bind-Value="@model.EndDateTime" ShowTime="false"
+                              DateFormat="dd/MM/yyyy" Style="width: 100%; max-width: 150px;" />
+            <RadzenRequiredValidator Component="End" Text="End is required" />
+            <RadzenNumeric Min="0" Max="24" @bind-Value=@EndHour Style="width: 100%; max-width: 100px;" />
+            <RadzenNumeric Min="0" Max="45" Step="15" @bind-Value=@EndMinute Style="width: 100%; max-width: 100px;" />
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="Service" />
+        </div>
+        <div class="col">
+            <RadzenDropDown TValue="Service" Data=@dataServices TextProperty="Description" ValueProperty="ServiceId"
+                            Style="width: 100%; max-width: 350px;" Value=@service.ServiceId
+                            SelectedItem=@service SelectedItemChanged=@OnChangeService Name="ServiceControl" />
+
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="Pet" />
+        </div>
+        <div class="col">
+            <RadzenDropDown Data=@dataPets TextProperty="Name" ValueProperty="Name"
+                            Multiple=true AllowClear=true Placeholder="Select pets" Chips=true
+                            Style="width: 100%; max-width: 350px;"
+                            @bind-Value=@pets Name="PetsControl" />
+            <RadzenRequiredValidator Component="PetsControl" Text="Pet is required" />
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="Helper" />
+        </div>
+        <div class="col">
+            <RadzenLabel Text=@dataHelper.Name />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col">
+            <RadzenButton ButtonType="ButtonType.Submit" Text="Save" />
+            <RadzenButton Text="Cancel" ButtonType="ButtonType.Button" ButtonStyle="ButtonStyle.Secondary" Click="@(args => DialogService.Close())" />
+        </div>
+    </div>
+</RadzenTemplateForm>
+@code {
+    [Parameter]
+    public Appointment Appointment { get; set; }
+
+    Appointment model = new Appointment();
+
+    public int StartHour { get; set; }
+
+    public int StartMinute { get; set; }
+
+    public int EndHour { get; set; }
+
+    public int EndMinute { get; set; }
+
+    private Service service;
+    private IEnumerable<Service> dataServices = new List<Service> {
+         new Service { ServiceId= 1 , Description = "Paseo"},
+         new Service { ServiceId= 2 , Description = "Hospedaje"}
+    };
+
+
+
+    IEnumerable<string> pets;
+    private IEnumerable<Pet> dataPets = new List<Pet> {
+         new Pet { PetId= Guid.NewGuid() , Name = "Toribio"},
+         new Pet { PetId= Guid.NewGuid() , Name = "Chompi"}
+    };
+
+
+    public Helper dataHelper = new Helper
+    {
+        HelperId = Guid.Parse("E37C8D1F-04BE-402E-A584-EFD46DBC3BE9")
+        ,
+        Name = "Giovanni"
+    };
+
+    protected async override Task OnInitializedAsync()
+    {
+        service = dataServices.FirstOrDefault();
+
+
+    }
+
+    protected override void OnParametersSet()
+    {
+        model = Appointment;
+        StartHour = model.StartDateTime.Hour;
+        EndHour = model.EndDateTime.Hour;
+        StartMinute = model.EndDateTime.Minute;
+        EndMinute = model.EndDateTime.Minute;
+    }
+
+    void OnSubmit(Appointment model)
+    {
+        model.StartDateTime = new DateTime(model.StartDateTime.Year, model.StartDateTime.Month, model.StartDateTime.Day, StartHour, StartMinute, 0);
+        model.EndDateTime = new DateTime(model.EndDateTime.Year, model.EndDateTime.Month, model.EndDateTime.Day, EndHour, EndMinute, 0);
+
+
+        var petList = string.Join(", ", pets.Select(
+        x => x));
+
+        model.Subject = service.Description + " " + petList;
+        model.FromUserId = Guid.Parse("E37C8D1F-04BE-402E-A584-EFD46DBC3BE9");
+        model.receivers = new List<Receiver> {
+                new Receiver{ ToUserId = dataHelper.HelperId, AppointmentId= model.AppointmentId.Value, ReceiverId= Guid.NewGuid() }
+            };
+        DialogService.Close(model);
+    }
+
+    void OnChangeService(object value)
+    {
+        service = value as Service;
+
+    }
+}

@@ -1,5 +1,5 @@
-using Appointments.Calendars.Application;
-using Appointments.Calendars.Domain;
+using HelperServices.Calendars.Application;
+using HelperServices.Calendars.Domain;
 using AutoMapper;
 using Backend.Controllers.Appointments.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +25,7 @@ public class AppointmentPutController : ControllerBase
                                         , calendarId
                                         , appointment.RangeOfDates.StartDateTime
                                         , appointment.RangeOfDates.EndDateTime
+                                        , appointment.Subject
                                         , appointment.Message
                                         , appointment.FromUserId
                                         , appointment.Receivers);

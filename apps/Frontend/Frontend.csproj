@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.3" PrivateAssets="all" />
+    <PackageReference Include="Radzen.Blazor" Version="4.7.13" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Models\Catalogs\" />
+    <None Remove="Pages\Helpers\" />
+    <None Remove="Models\Helpers\" />
+    <None Remove="Models\Pets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Catalogs\" />
+    <Folder Include="Pages\Helpers\" />
+    <Folder Include="Models\Helpers\" />
+    <Folder Include="Models\Pets\" />
+  </ItemGroup>
+</Project>

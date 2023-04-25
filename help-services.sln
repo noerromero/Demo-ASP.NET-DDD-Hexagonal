@@ -5,27 +5,24 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4FBFA9E5-4D18-472A-9179-2C21AC735D84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appointments", "src\Appointments\Appointments.csproj", "{2C46B5F6-AB54-438A-97EF-013A1A4C234C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{5A71724C-0A40-4C86-8D6C-7194229A151D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend", "apps\Backend\Backend.csproj", "{B4E4511D-034F-4599-A2EE-4F90FDB620E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "apps\Backend\Backend.csproj", "{B4E4511D-034F-4599-A2EE-4F90FDB620E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedCore", "src\SharedCore\SharedCore.csproj", "{CC29D9FD-C689-400A-A08A-B9F4F4736227}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedCore", "src\SharedCore\SharedCore.csproj", "{CC29D9FD-C689-400A-A08A-B9F4F4736227}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frontend", "apps\Frontend\Frontend.csproj", "{39CCCE77-5E1E-4A9B-9ACB-736265B26390}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedOffice", "src\SharedOffice\SharedOffice.csproj", "{15151E90-563C-483A-BCB9-C581E44392FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperServices", "src\HelperServices\HelperServices.csproj", "{34083458-7905-417E-9402-276BB42FC251}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2C46B5F6-AB54-438A-97EF-013A1A4C234C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C46B5F6-AB54-438A-97EF-013A1A4C234C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C46B5F6-AB54-438A-97EF-013A1A4C234C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C46B5F6-AB54-438A-97EF-013A1A4C234C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B4E4511D-034F-4599-A2EE-4F90FDB620E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B4E4511D-034F-4599-A2EE-4F90FDB620E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4E4511D-034F-4599-A2EE-4F90FDB620E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -34,10 +31,27 @@ Global
 		{CC29D9FD-C689-400A-A08A-B9F4F4736227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC29D9FD-C689-400A-A08A-B9F4F4736227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC29D9FD-C689-400A-A08A-B9F4F4736227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39CCCE77-5E1E-4A9B-9ACB-736265B26390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39CCCE77-5E1E-4A9B-9ACB-736265B26390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39CCCE77-5E1E-4A9B-9ACB-736265B26390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39CCCE77-5E1E-4A9B-9ACB-736265B26390}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15151E90-563C-483A-BCB9-C581E44392FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15151E90-563C-483A-BCB9-C581E44392FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15151E90-563C-483A-BCB9-C581E44392FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15151E90-563C-483A-BCB9-C581E44392FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34083458-7905-417E-9402-276BB42FC251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34083458-7905-417E-9402-276BB42FC251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34083458-7905-417E-9402-276BB42FC251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34083458-7905-417E-9402-276BB42FC251}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2C46B5F6-AB54-438A-97EF-013A1A4C234C} = {4FBFA9E5-4D18-472A-9179-2C21AC735D84}
 		{B4E4511D-034F-4599-A2EE-4F90FDB620E0} = {5A71724C-0A40-4C86-8D6C-7194229A151D}
 		{CC29D9FD-C689-400A-A08A-B9F4F4736227} = {4FBFA9E5-4D18-472A-9179-2C21AC735D84}
+		{39CCCE77-5E1E-4A9B-9ACB-736265B26390} = {5A71724C-0A40-4C86-8D6C-7194229A151D}
+		{15151E90-563C-483A-BCB9-C581E44392FA} = {4FBFA9E5-4D18-472A-9179-2C21AC735D84}
+		{34083458-7905-417E-9402-276BB42FC251} = {4FBFA9E5-4D18-472A-9179-2C21AC735D84}
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,5 @@
-using Appointments.Calendars.Application;
-using Appointments.Calendars.Domain;
+using HelperServices.Calendars.Application;
+using HelperServices.Calendars.Domain;
 using AutoMapper;
 using Backend.Controllers.Appointments.Models;
 using Microsoft.AspNetCore.JsonPatch;
@@ -42,6 +42,7 @@ public class AppointmentPatchController : ControllerBase
         var success = await _appointmentUpdater.PartialUpdate(id, calendarId
                                         , appointmentForUpdateDTO.StartDateTime
                                         , appointmentForUpdateDTO.EndDateTime
+                                        , appointmentForUpdateDTO.Subject
                                         , appointmentForUpdateDTO.Message
                                         );
 

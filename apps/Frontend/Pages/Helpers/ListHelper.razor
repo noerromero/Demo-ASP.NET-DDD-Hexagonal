@@ -1,0 +1,66 @@
+﻿@page "/listhelper"
+
+@using Frontend.Models.Helpers;
+
+<RadzenDataList PageSize="6" WrapItems="true" AllowPaging="true" Data="@helpers" TItem="Helper">
+    <Template Context="helperItem">
+        <RadzenCard Style="width: 250px;" Class="rz-border-radius-3">
+            @*
+        <RadzenRow Gap="0.5rem">
+            <RadzenColumn Size="8" Class="rz-text-truncate">
+                <RadzenBadge BadgeStyle="BadgeStyle.Light" Text=@($"{order.OrderID}") Class="rz-mr-1" IsPill="true" />
+                <RadzenText TextStyle="TextStyle.Caption" Class="rz-mb-0">@(order.ShipName)</RadzenText>
+            </RadzenColumn>
+            <RadzenColumn Size="4" Class="rz-text-align-right">
+                <RadzenBadge BadgeStyle="BadgeStyle.Secondary" Shade="Shade.Lighter" Text=@($"{String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", order.Freight)}") IsPill="true" />
+            </RadzenColumn>
+        </RadzenRow>
+
+
+            *@
+
+            <RadzenRow Gap="0.5rem">
+                <RadzenColumn Size="4" Class="rz-text-truncate">
+                    
+                </RadzenColumn>
+                <RadzenColumn Size="8" Class="rz-text-align-right">
+                    <RadzenLink Path="scheduler/E37C8D1F-04BE-402E-A584-EFD46DBC3BE9" Text="Go to my calendar" Style="font-size:small; color:blue" />
+                </RadzenColumn>
+            </RadzenRow>
+
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem">
+                <RadzenImage Path=@helperItem.PicturePath Class="rz-border-radius-10" Style="width: 80px; height: 80px;" />
+                <RadzenStack Gap="0">
+                    <RadzenText TextStyle="TextStyle.Subtitle1" Class="rz-mb-0"><strong>@helperItem.Name</strong></RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body2" Class="rz-mb-0">@helperItem.AboutMe</RadzenText>
+
+                </RadzenStack>
+            </RadzenStack>
+
+            <RadzenRow Gap="0.5rem">
+                <RadzenColumn Size="4" Class="rz-text-truncate">
+
+                </RadzenColumn>
+                <RadzenColumn Size="8" Class="rz-text-align-right">
+                    <RadzenRating @bind-Value=@helperItem.Rating ReadOnly=true />
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenCard>
+    </Template>
+</RadzenDataList>
+
+@code{
+    IEnumerable<Helper> helpers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        helpers = new List<Helper> {
+                new Helper {  HelperId= Guid.NewGuid(), Name = "Noe", AboutMe="I love dogs", PicturePath="https://imagizer.imageshack.com/img922/1808/xksXc9.png" , Rating=3},
+                new Helper {  HelperId= Guid.NewGuid(), Name = "Giovanni", AboutMe="I like to rescue dogs", PicturePath="https://imagizer.imageshack.com/img922/1808/xksXc9.png", Rating=4 },
+                new Helper {  HelperId= Guid.NewGuid(), Name = "Angelica", AboutMe="Cats are my life", PicturePath = "https://imagizer.imageshack.com/img922/1808/xksXc9.png", Rating=2}
+        };
+    }
+
+    }
