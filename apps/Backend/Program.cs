@@ -5,12 +5,19 @@ using HelperServices.Calendars.Infrastructure.Persistence;
 using SharedOffice.Shared.Infrastructure.Persistence.EntityFramework;
 using SharedOffice.Users.Domain;
 using SharedOffice.Users.Infrastructure.Persistence;
+using FluentValidation.AspNetCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+// Add manually fluent validation
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

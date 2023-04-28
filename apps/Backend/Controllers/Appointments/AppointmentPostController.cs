@@ -3,6 +3,7 @@ using HelperServices.Calendars.Domain;
 using HelperServices.Calendars.Application;
 using Backend.Controllers.Appointments.Dtos;
 using AutoMapper;
+using Backend.Controllers.Appointments.Validations;
 
 namespace Backend.Controllers;
 
@@ -39,6 +40,15 @@ public class AppointmentPostController : ControllerBase
     //Implementing Post method with DTO class
     [HttpPost]
     public async Task<IActionResult> Post(Guid calendarId, [FromBody] AppointmentPostRequestDTO appointmentPostRequestDTO){
+
+        var validatorResult = new AppointmentPostRequestDTOValidator().Validate(appointmentPostRequestDTO);
+
+        if (!validatorResult.IsValid)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, validatorResult.Errors);
+        }
+
+
         var appointment = _mapper.Map<Appointment>(appointmentPostRequestDTO);
         //await _bus.Dispatch(new CreateCourseCommand(id, body["name"].ToString(), body["duration"].ToString()));
         await _appointmentCreator.Create(appointment.Id

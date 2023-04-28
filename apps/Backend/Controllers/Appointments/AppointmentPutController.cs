@@ -18,7 +18,7 @@ public class AppointmentPutController : ControllerBase
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    
+    [HttpPut]
     public async Task<IActionResult> Put(Guid calendarId, [FromBody] AppointmentPutRequestDTO appointmentPutRequestDTO){
         var appointment = _mapper.Map<Appointment>(appointmentPutRequestDTO);
         var success = await _appointmentUpdater.Update(appointment.Id
